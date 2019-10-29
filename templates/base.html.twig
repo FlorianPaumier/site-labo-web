@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="descrition" content="page principal">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        <link rel="stylesheet" href="{{ as }}">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.5.3/dist/css/foundation.min.css">
+        {% block stylesheets %}{% endblock %}
+    </head>
+    <body>
+    <header>
+        <nav>
+            <ul>
+                <li>
+                    <a href="{{ path('user_index') }}">User</a>
+                </li>
+                <li>
+                    <a href="{{ path('cours_index') }}">Cours</a>
+                </li>
+                <li>
+                    <a href="{{ path('emails_index') }}">Emails</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        {% block body %}{% endblock %}
+    </main>
+    <footer>
+
+    </footer>
+        <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.5.3/dist/js/foundation.min.js"></script>
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>
