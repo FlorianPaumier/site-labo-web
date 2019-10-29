@@ -5,6 +5,7 @@
 {% block body %}
     <h1>Cours index</h1>
 
+<div class="container">
     <table>
         <thead>
             <tr>
@@ -32,6 +33,6 @@
         {% endfor %}
         </tbody>
     </table>
-
+</div>
     <a href="{{ path('cours_new') }}">Create new</a>
 {% endblock %}

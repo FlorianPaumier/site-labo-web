@@ -1,0 +1,31 @@
+body, html {
+  margin: 0;
+  padding: 0;
+}
+
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+.clearfix::before {
+  content: "";
+  display: table;
+}
+
+.container {
+  margin: 0 auto;
+  padding: 0 15px;
+  width: 1170px;
+}
+
+.btn {
+  border: 0 transparent solid;
+  border-radius: 1px;
+  padding: 0.5em;
+}
+.btn-blue {
+  background-color: #217BB2;
+}
+
+/*# sourceMappingURL=button.css.map */

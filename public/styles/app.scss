@@ -1,0 +1,37 @@
+@import "variables";
+@import "button";
+
+header {
+  color: white;
+  background-color: $lightGray;
+  display: flex;
+  align-self: center;
+  padding: 1em;
+  vertical-align: center;
+
+  .logo {
+    flex-grow: 1;
+  }
+}
+
+nav {
+  ul {
+    li {
+      list-style: none;
+      display: inline-block;
+    }
+  }
+
+  a {
+    text-decoration: none;
+    color : white;
+
+    &:hover{
+      color: white;
+    }
+  }
+}
+
+td {
+  max-width: 30vw;
+}

@@ -1,0 +1,29 @@
+@import "variables";
+
+a.btn {
+  color: white;
+
+  &:hover {
+    color: white;
+  }
+}
+
+.btn {
+  border : 0 transparent solid;
+  border-radius: 1px;
+  padding: 0.5em;
+  min-width: 35px;
+  text-align: center;
+
+  &-blue {
+    background-color: $blue;
+  }
+
+  &-success {
+    background-color: rgba(48, 223, 95, 0.81);
+  }
+
+  &-danger {
+    background-color: #df0001;
+  }
+}

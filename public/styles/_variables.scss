@@ -1,0 +1,30 @@
+//Default Class
+body, html {
+  margin: 0;
+  padding: 0;
+}
+
+.clearfix{
+  &::after{
+    content: "";
+    clear: both;
+    display: table;
+  }
+
+  &::before {
+    content : '';
+    display: table;
+  }
+}
+
+.container {
+  margin: 0 auto;
+  padding: 0 15px;
+  width: 1170px;
+}
+
+//Color
+$blue: #217BB2;
+$darkGray:#1a1a1a;
+$gray:#343434;
+$lightGray:#595959;
