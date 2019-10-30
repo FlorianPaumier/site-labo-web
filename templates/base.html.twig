@@ -13,20 +13,44 @@
     <a href="/" class="logo"><img src="/img/logo_myges_126x40.png" alt="Logo Esgi"></a>
     <nav>
         <ul>
-            <li>
-                <a class="btn btn-blue" href="{{ path('user_index') }}">User</a>
-            </li>
-            <li>
-                <a class="btn btn-blue" href="{{ path('cours_index') }}">Cours</a>
-            </li>
-            <li>
-                <a class="btn btn-blue" href="{{ path('emails_index') }}">Emails</a>
-            </li>
+            {% if app.user is not null %}
+                <li>
+                    <a class="btn btn-blue" href="{{ path('app_logout') }}">Logout</a>
+                </li>
+                <li>
+                    <a class="btn btn-blue" href="{{ path('user_index') }}">User</a>
+                </li>
+                <li>
+                    <a class="btn btn-blue" href="{{ path('cours_index') }}">Cours</a>
+                </li>
+                <li>
+                    <a class="btn btn-blue" href="{{ path('emails_index') }}">Emails</a>
+                </li>
+
+                <li><a class="btn btn-blue" href="{{ path('sondage_index') }}">Sondage</a></li>
+                <li><a class="btn btn-blue" href="{{ path('themes_index') }}">Thèmes</a></li>
+            {% else %}
+                <li>
+                    <a class="btn btn-blue" href="{{ path('app_login') }}">Login</a>
+                </li>
+                <li>
+                    <a class="btn btn-blue" href="{{ path('app_register') }}">Sign Up</a>
+                </li>
+            {% endif %}
         </ul>
     </nav>
 </header>
 <main>
     {% block body %}{% endblock %}
+
+    {% if app.user and sondages is defined and sondages is not null%}
+        {% for sondage in sondages %}
+            {{ sondage.name }}
+            {% for theme in sondage.themes %}
+                {{ theme.name }}
+            {% endfor %}
+        {% endfor %}
+    {% endif %}
 </main>
 <footer>
 

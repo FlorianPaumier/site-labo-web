@@ -33,9 +33,15 @@ class Cours
      */
     private $attendance;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\User", mappedBy="cours")
+     */
+    private $users;
+
     public function __construct()
     {
         $this->attendance = new ArrayCollection();
+        $this->users = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -88,6 +94,34 @@ class Cours
     {
         if ($this->attendance->contains($attendance)) {
             $this->attendance->removeElement($attendance);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|User[]
+     */
+    public function getUsers(): Collection
+    {
+        return $this->users;
+    }
+
+    public function addUser(User $user): self
+    {
+        if (!$this->users->contains($user)) {
+            $this->users[] = $user;
+            $user->addCour($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUser(User $user): self
+    {
+        if ($this->users->contains($user)) {
+            $this->users->removeElement($user);
+            $user->removeCour($this);
         }
 
         return $this;

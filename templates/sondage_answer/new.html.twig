@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New SondageAnswer{% endblock %}
+
+{% block body %}
+    <h1>Create new SondageAnswer</h1>
+
+    {{ include('sondage_answer/_form.html.twig') }}
+
+    <a href="{{ path('sondage_answer_index') }}">back to list</a>
+{% endblock %}

@@ -33,9 +33,11 @@ class Emails
      */
     private $dest;
 
+
     public function __construct()
     {
         $this->dest = new ArrayCollection();
+        $this->users = new ArrayCollection();
     }
 
     public function getId(): ?int

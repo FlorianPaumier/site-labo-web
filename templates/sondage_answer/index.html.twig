@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}SondageAnswer index{% endblock %}
+
+{% block body %}
+    <h1>SondageAnswer index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for sondage_answer in sondage_answers %}
+            <tr>
+                <td>{{ sondage_answer.id }}</td>
+                <td>
+                    <a href="{{ path('sondage_answer_show', {'id': sondage_answer.id}) }}">show</a>
+                    <a href="{{ path('sondage_answer_edit', {'id': sondage_answer.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="2">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('sondage_answer_new') }}">Create new</a>
+{% endblock %}
