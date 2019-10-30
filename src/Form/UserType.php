@@ -16,7 +16,6 @@ class UserType extends AbstractType
             ->add('email')
             ->add('class')
             ->add('point')
-            ->add('emails')
         ;
     }
 

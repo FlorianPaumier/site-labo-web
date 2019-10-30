@@ -18,8 +18,13 @@
                     <a class="btn btn-blue" href="{{ path('app_logout') }}">Logout</a>
                 </li>
                 <li>
+                    {% if "ROLE_ADMIN" in app.user.roles %}
                     <a class="btn btn-blue" href="{{ path('user_index') }}">User</a>
+                    {% else %}
+                        <a class="btn btn-blue" href="{{ path('me') }}">Profile</a>
+                    {% endif %}
                 </li>
+            {% if "ROLE_ADMIN" in app.user.roles %}
                 <li>
                     <a class="btn btn-blue" href="{{ path('cours_index') }}">Cours</a>
                 </li>
@@ -28,6 +33,7 @@
                 </li>
 
                 <li><a class="btn btn-blue" href="{{ path('sondage_index') }}">Sondage</a></li>
+                {% endif %}
                 <li><a class="btn btn-blue" href="{{ path('themes_index') }}">Thèmes</a></li>
             {% else %}
                 <li>

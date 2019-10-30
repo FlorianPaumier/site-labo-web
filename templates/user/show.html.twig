@@ -30,9 +30,13 @@
         </tbody>
     </table>
 
-    <a href="{{ path('user_index') }}">back to list</a>
-
+    {% if 'ROLE_ADMIN' in app.user.roles %}
     <a href="{{ path('user_edit', {'id': user.id}) }}">edit</a>
+    <a href="{{ path('user_index') }}">back to list</a>
+    {% else %}
+        <a href="{{ path('user_reset_password') }}">Change Password</a>
+        <a href="{{ path('app_home_home') }}">back to home</a>
+    {% endif %}
 
     {{ include('user/_delete_form.html.twig') }}
 {% endblock %}
