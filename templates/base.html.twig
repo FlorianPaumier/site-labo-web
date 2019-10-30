@@ -1,37 +1,38 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <meta name="descrition" content="page principal">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.5.3/dist/css/foundation.min.css">
-        <link rel="stylesheet" href="/styles/app.css">
-        {% block stylesheets %}{% endblock %}
-    </head>
-    <body>
-    <header>
-        <a href="/" class="logo"><img src="/img/logo_myges_126x40.png" alt="Logo Esgi"></a>
-        <nav>
-            <ul>
-                <li>
-                    <a class="btn btn-blue" href="{{ path('user_index') }}">User</a>
-                </li>
-                <li>
-                    <a class="btn btn-blue" href="{{ path('cours_index') }}">Cours</a>
-                </li>
-                <li>
-                    <a class="btn btn-blue" href="{{ path('emails_index') }}">Emails</a>
-                </li>
-            </ul>
-        </nav>
-    </header>
-    <main>
-        {% block body %}{% endblock %}
-    </main>
-    <footer>
+<head>
+    <meta charset="UTF-8">
+    <meta name="descrition" content="page principal">
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.5.3/dist/css/foundation.min.css">
+    <link rel="stylesheet" href="/styles/app.css">
+    {% block stylesheets %}{% endblock %}
+</head>
+<body>
+<header>
+    <a href="/" class="logo"><img src="/img/logo_myges_126x40.png" alt="Logo Esgi"></a>
+    <nav>
+        <ul>
+            <li>
+                <a class="btn btn-blue" href="{{ path('user_index') }}">User</a>
+            </li>
+            <li>
+                <a class="btn btn-blue" href="{{ path('cours_index') }}">Cours</a>
+            </li>
+            <li>
+                <a class="btn btn-blue" href="{{ path('emails_index') }}">Emails</a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main>
+    {% block body %}{% endblock %}
+</main>
+<footer>
 
-    </footer>
-        <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.5.3/dist/js/foundation.min.js"></script>
-        {% block javascripts %}{% endblock %}
-    </body>
+</footer>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.5.3/dist/js/foundation.min.js"></script>
+{% block javascripts %}{% endblock %}
+</body>
 </html>

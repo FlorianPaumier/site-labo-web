@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Cours;
+use App\Form\CoursEditType;
 use App\Form\CoursType;
 use App\Repository\CoursRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -63,7 +64,7 @@ class CoursController extends AbstractController
      */
     public function edit(Request $request, Cours $cour): Response
     {
-        $form = $this->createForm(CoursType::class, $cour);
+        $form = $this->createForm(CoursEditType::class, $cour);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

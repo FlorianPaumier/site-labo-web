@@ -43,9 +43,16 @@ class User
      */
     private $emails;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Cours", mappedBy="attendance")
+     */
+    private $cours;
+
     public function __construct()
     {
         $this->emails = new ArrayCollection();
+        $this->attendances = new ArrayCollection();
+        $this->cours = new ArrayCollection();
     }
 
     public function __toString()
@@ -127,6 +134,34 @@ class User
     {
         if ($this->emails->contains($email)) {
             $this->emails->removeElement($email);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Cours[]
+     */
+    public function getCours(): Collection
+    {
+        return $this->cours;
+    }
+
+    public function addCour(Cours $cour): self
+    {
+        if (!$this->cours->contains($cour)) {
+            $this->cours[] = $cour;
+            $cour->addAttendance($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCour(Cours $cour): self
+    {
+        if ($this->cours->contains($cour)) {
+            $this->cours->removeElement($cour);
+            $cour->removeAttendance($this);
         }
 
         return $this;

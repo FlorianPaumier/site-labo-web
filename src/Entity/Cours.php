@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -25,6 +27,16 @@ class Cours
      * @ORM\Column(type="text")
      */
     private $message;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\User", inversedBy="cours")
+     */
+    private $attendance;
+
+    public function __construct()
+    {
+        $this->attendance = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -51,6 +63,32 @@ class Cours
     public function setMessage(string $message): self
     {
         $this->message = $message;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|User[]
+     */
+    public function getAttendance(): Collection
+    {
+        return $this->attendance;
+    }
+
+    public function addAttendance(User $attendance): self
+    {
+        if (!$this->attendance->contains($attendance)) {
+            $this->attendance[] = $attendance;
+        }
+
+        return $this;
+    }
+
+    public function removeAttendance(User $attendance): self
+    {
+        if ($this->attendance->contains($attendance)) {
+            $this->attendance->removeElement($attendance);
+        }
 
         return $this;
     }

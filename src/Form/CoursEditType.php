@@ -3,18 +3,25 @@
 namespace App\Form;
 
 use App\Entity\Cours;
+use App\Entity\User;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class CoursType extends AbstractType
+class CoursEditType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('date', DateType::class)
-            ->add('message')
+            ->add('attendance', EntityType::class , [
+                "class" => User::class,
+                "multiple" => true,
+                "attr" => [
+                    "class" => "select-js"
+                ]
+            ])
         ;
     }
 
