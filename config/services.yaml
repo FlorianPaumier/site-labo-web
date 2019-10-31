@@ -29,3 +29,7 @@ services:
     # this is the service's id
     app.email_manager:
         class: App\Services\EmailManager
+    twig.extension.intl:
+        class: Twig_Extensions_Extension_Intl
+        tags:
+            - { name: twig.extension }

@@ -11,6 +11,9 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Themes
 {
+
+    use TimestampEntity;
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -37,6 +40,8 @@ class Themes
     {
         $this->sondages = new ArrayCollection();
         $this->sondageAnswers = new ArrayCollection();
+        $this->createdAt = new \DateTime();
+        $this->updatedAt = new \DateTime();
     }
 
     public function __toString()

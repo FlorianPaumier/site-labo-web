@@ -11,6 +11,9 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Emails
 {
+
+    use TimestampEntity;
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -38,6 +41,9 @@ class Emails
     {
         $this->dest = new ArrayCollection();
         $this->users = new ArrayCollection();
+
+        $this->createdAt = new \DateTime();
+        $this->updatedAt = new \DateTime();
     }
 
     public function getId(): ?int

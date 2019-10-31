@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\SondageAnswer;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 
@@ -19,6 +20,35 @@ class SondageAnswerRepository extends ServiceEntityRepository
         parent::__construct($registry, SondageAnswer::class);
     }
 
+    public function findByuser(User $user = null)
+    {
+        $result = [];
+        if(!is_null($user)){
+            $entity = $this->createQueryBuilder("sa")
+                ->select("sa.id")
+                ->where('sa.user = :user')
+                ->setParameter("user",$user)
+                ->getQuery()
+                ->getResult();
+
+            $result = array_map(function ($id){
+                return $id["id"];
+            }, $entity);
+        }
+
+        return $result;
+    }
+
+    public function findCount()
+    {
+        return $this->createQueryBuilder("sa")
+            ->innerJoin("sa.sondage", "s")
+            ->distinct()
+            ->select("count('s.sondage.id')")
+            ->getQuery()
+            ->getResult()
+            ;
+    }
     // /**
     //  * @return SondageAnswer[] Returns an array of SondageAnswer objects
     //  */

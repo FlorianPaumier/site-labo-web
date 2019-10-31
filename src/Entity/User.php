@@ -14,6 +14,9 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 class User implements UserInterface
 {
+
+    use TimestampEntity;
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -38,6 +41,7 @@ class User implements UserInterface
     private $password;
 
     /**
+     * @var string
      * @ORM\Column(type="string", length=255)
      */
     private $name;
@@ -73,6 +77,13 @@ class User implements UserInterface
         $this->emails = new ArrayCollection();
         $this->cours = new ArrayCollection();
         $this->sondageAnswer = new ArrayCollection();
+        $this->createdAt = new \DateTime();
+        $this->updatedAt = new \DateTime();
+    }
+
+    public function __toString()
+    {
+       return $this->name;
     }
 
     public function getId(): ?int

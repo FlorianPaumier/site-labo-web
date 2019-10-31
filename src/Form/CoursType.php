@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Cours;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -14,6 +15,7 @@ class CoursType extends AbstractType
     {
         $builder
             ->add('date', DateType::class)
+            ->add('name', TextType::class)
             ->add('message')
         ;
     }

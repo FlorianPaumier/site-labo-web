@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="descrition" content="page principal">
     <title>{% block title %}Welcome!{% endblock %}</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.5.3/dist/css/foundation.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="/styles/app.css">
     {% block stylesheets %}{% endblock %}
 </head>
@@ -19,20 +20,20 @@
                 </li>
                 <li>
                     {% if "ROLE_ADMIN" in app.user.roles %}
-                    <a class="btn btn-blue" href="{{ path('user_index') }}">User</a>
+                        <a class="btn btn-blue" href="{{ path('user_index') }}">User</a>
                     {% else %}
                         <a class="btn btn-blue" href="{{ path('me') }}">Profile</a>
                     {% endif %}
                 </li>
-            {% if "ROLE_ADMIN" in app.user.roles %}
-                <li>
-                    <a class="btn btn-blue" href="{{ path('cours_index') }}">Cours</a>
-                </li>
-                <li>
-                    <a class="btn btn-blue" href="{{ path('emails_index') }}">Emails</a>
-                </li>
+                {% if "ROLE_ADMIN" in app.user.roles %}
+                    <li>
+                        <a class="btn btn-blue" href="{{ path('cours_index') }}">Cours</a>
+                    </li>
+                    <li>
+                        <a class="btn btn-blue" href="{{ path('emails_index') }}">Emails</a>
+                    </li>
 
-                <li><a class="btn btn-blue" href="{{ path('sondage_index') }}">Sondage</a></li>
+                    <li><a class="btn btn-blue" href="{{ path('sondage_index') }}">Sondage</a></li>
                 {% endif %}
                 <li><a class="btn btn-blue" href="{{ path('themes_index') }}">Thèmes</a></li>
             {% else %}
@@ -47,22 +48,66 @@
     </nav>
 </header>
 <main>
-    {% block body %}{% endblock %}
+    {% block body %}
+        <div class="container-fluid row">
+            {% if app.user and sondages is defined and sondages is not null %}
+                <section id="sondage" class="col-sm-12 col-md-6">
+                    {% for sondage in sondages %}
+                      {% if sondage.id not in answers %}
+                        <div class="card" id="sondage{{ sondage.id }}">
+                            <div class="card-header">
+                                {{ sondage.name }}
+                            </div>
+                            <div class="card-body">
+                                <ul class="list-group">
+                                    {% for theme in sondage.themes %}
+                                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                                            <label for="theme-{{ theme.id }}">
+                                                {{ theme.name }}
+                                            </label>
+                                            <input type="radio" name="sondage{{ sondage.id }}-answer" id="theme-{{ theme.id }}"
+                                                   data-id="{{ theme.id }}" autocomplete="off" class="radio-primary"/>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                            <div class="card-footer">
+                                <button class="btn btn-info btnSubmitSondage" data-id="{{ sondage.id }}">Voter</button>
+                            </div>
+                        </div>
+                        {% endif %}
+                    {% endfor %}
+                </section>
 
-    {% if app.user and sondages is defined and sondages is not null%}
-        {% for sondage in sondages %}
-            {{ sondage.name }}
-            {% for theme in sondage.themes %}
-                {{ theme.name }}
-            {% endfor %}
-        {% endfor %}
-    {% endif %}
+
+            {% endif %}
+
+            {% if cours is defined %}
+                <section id="cours" class="col-sm-12 col-md-6 row">
+                    {% for cour in cours %}
+                        <div class="col-md-4">
+                            <div class="card border-primary">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ cour.name }}</h5>
+                                    <p class="card-text">{{ cour.message|slice(0,50)|raw }}</p>
+                                </div>
+                                <div class="card-footer">
+                                    <small class="text-muted">{{ cour.date|localizeddate('medium', 'none', 'fr') }}</small>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </section>
+            {% endif %}
+        </div>
+    {% endblock %}
 </main>
 <footer>
 
 </footer>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.5.3/dist/js/foundation.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="/scripts/sondage.js"></script>
 {% block javascripts %}{% endblock %}
 </body>
 </html>

@@ -11,6 +11,9 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Sondage
 {
+
+    use TimestampEntity;
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -42,6 +45,10 @@ class Sondage
     {
         $this->themes = new ArrayCollection();
         $this->sondageAnswers = new ArrayCollection();
+
+
+        $this->createdAt = new \DateTime();
+        $this->updatedAt = new \DateTime();
     }
 
     public function getId(): ?int

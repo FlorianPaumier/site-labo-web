@@ -1,0 +1,27 @@
+{
+  "name": "assoc",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FlorianPaumier/site-labo-web.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/FlorianPaumier/site-labo-web/issues"
+  },
+  "homepage": "https://github.com/FlorianPaumier/site-labo-web#readme",
+  "dependencies": {
+    "@symfony/webpack-encore": "^0.28.0"
+  },
+  "devDependencies": {
+    "node-sass": "^4.13.0",
+    "sass-loader": "^7.3.1",
+    "webpack-notifier": "^1.8.0"
+  }
+}

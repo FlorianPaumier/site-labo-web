@@ -92,4 +92,23 @@ td {
   max-width: 30vw;
 }
 
+#cours .form-group input[type=radio] {
+  display: none;
+}
+#cours .form-group input[type=radio] + .btn-group > label span {
+  width: 20px;
+}
+#cours .form-group input[type=radio] + .btn-group > label span:first-child {
+  display: none;
+}
+#cours .form-group input[type=radio] + .btn-group > label span:last-child {
+  display: inline-block;
+}
+#cours .form-group input[type=radio]:checked + .btn-group > label span:first-child {
+  display: inline-block;
+}
+#cours .form-group input[type=radio]:checked + .btn-group > label span:last-child {
+  display: none;
+}
+
 /*# sourceMappingURL=app.css.map */

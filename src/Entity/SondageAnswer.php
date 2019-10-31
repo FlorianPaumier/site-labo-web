@@ -9,6 +9,9 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class SondageAnswer
 {
+
+    use TimestampEntity;
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -30,6 +33,12 @@ class SondageAnswer
      * @ORM\ManyToOne(targetEntity="App\Entity\Sondage", inversedBy="sondageAnswers")
      */
     private $sondage;
+
+    public function __construct()
+    {
+        $this->createdAt = new \DateTime();
+        $this->updatedAt = new \DateTime();
+    }
 
     public function getId(): ?int
     {

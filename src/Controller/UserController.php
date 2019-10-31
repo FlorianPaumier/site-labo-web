@@ -61,7 +61,6 @@ class UserController extends AbstractController
             }else{
                 // Si l'ancien mot de passe est bon
                 if ($passwordEncoder->isPasswordValid($user, $oldPassword)) {
-                    dump($user);
                     $newEncodedPassword = $passwordEncoder->encodePassword($user, $plainPassword["first"]);
                     $user->setPassword($newEncodedPassword);
 

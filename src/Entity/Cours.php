@@ -11,6 +11,9 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Cours
 {
+
+    use TimestampEntity;
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -38,10 +41,19 @@ class Cours
      */
     private $users;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $name;
+
     public function __construct()
     {
         $this->attendance = new ArrayCollection();
         $this->users = new ArrayCollection();
+
+        $this->createdAt = new \DateTime();
+        $this->updatedAt = new \DateTime();
+
     }
 
     public function getId(): ?int
@@ -123,6 +135,18 @@ class Cours
             $this->users->removeElement($user);
             $user->removeCour($this);
         }
+
+        return $this;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): self
+    {
+        $this->name = $name;
 
         return $this;
     }

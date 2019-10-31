@@ -14,11 +14,19 @@ use Doctrine\Common\Persistence\ManagerRegistry;
  */
 class CoursRepository extends ServiceEntityRepository
 {
+
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Cours::class);
     }
 
+    public function findOrderByDate(){
+        return $this->createQueryBuilder("c")
+            ->orderBy("c.updatedAt", "ASC")
+            ->getQuery()
+            ->getResult()
+            ;
+    }
     // /**
     //  * @return Cours[] Returns an array of Cours objects
     //  */
