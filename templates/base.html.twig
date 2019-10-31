@@ -89,10 +89,11 @@
                             <div class="card border-primary">
                                 <div class="card-body">
                                     <h5 class="card-title">{{ cour.name }}</h5>
+                                    <small class="card-subtitle text-muted">{{ cour.date|localizeddate('medium', 'none', 'fr') }}</small>
                                     <p class="card-text">{{ cour.message|slice(0,50)|raw }}</p>
                                 </div>
                                 <div class="card-footer">
-                                    <small class="text-muted">{{ cour.date|localizeddate('medium', 'none', 'fr') }}</small>
+                                    <a href="{{ path('cours_show', {'id' : cour.id}) }}" >Voirs plus</a>
                                 </div>
                             </div>
                         </div>
