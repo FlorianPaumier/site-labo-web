@@ -1,114 +1,98 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="descrition" content="page principal">
-    <title>{% block title %}Welcome!{% endblock %}</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="/styles/app.css">
-    {% block stylesheets %}{% endblock %}
-</head>
-<body>
-<header>
-    <a href="/" class="logo"><img src="/img/logo_myges_126x40.png" alt="Logo Esgi"></a>
-    <nav>
-        <ul>
-            {% if app.user is not null %}
-                <li>
-                    <a class="btn btn-blue" href="{{ path('app_logout') }}">Logout</a>
-                </li>
-                <li>
-                    {% if "ROLE_ADMIN" in app.user.roles %}
-                        <a class="btn btn-blue" href="{{ path('user_index') }}">User</a>
-                    {% else %}
-                        <a class="btn btn-blue" href="{{ path('me') }}">Profile</a>
-                    {% endif %}
-                </li>
-                {% if "ROLE_ADMIN" in app.user.roles %}
-                    <li>
-                        <a class="btn btn-blue" href="{{ path('cours_index') }}">Cours</a>
-                    </li>
-                    <li>
-                        <a class="btn btn-blue" href="{{ path('emails_index') }}">Emails</a>
-                    </li>
 
-                    <li><a class="btn btn-blue" href="{{ path('sondage_index') }}">Sondage</a></li>
-                {% endif %}
-                <li><a class="btn btn-blue" href="{{ path('themes_index') }}">Thèmes</a></li>
-            {% else %}
-                <li>
-                    <a class="btn btn-blue" href="{{ path('app_login') }}">Login</a>
-                </li>
-                <li>
-                    <a class="btn btn-blue" href="{{ path('app_register') }}">Sign Up</a>
-                </li>
-            {% endif %}
-        </ul>
-    </nav>
-</header>
-<main>
-    {% block body %}
-        <div class="container-fluid row">
-            {% if app.user and sondages is defined and sondages is not null %}
-                <section id="sondage" class="col-sm-12 col-md-6">
-                    {% for sondage in sondages %}
-                      {% if sondage.id not in answers %}
-                        <div class="card" id="sondage{{ sondage.id }}">
-                            <div class="card-header">
-                                {{ sondage.name }}
-                            </div>
-                            <div class="card-body">
-                                <ul class="list-group">
-                                    {% for theme in sondage.themes %}
-                                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                                            <label for="theme-{{ theme.id }}">
-                                                {{ theme.name }}
-                                            </label>
-                                            <input type="radio" name="sondage{{ sondage.id }}-answer" id="theme-{{ theme.id }}"
-                                                   data-id="{{ theme.id }}" autocomplete="off" class="radio-primary"/>
-                                        </li>
-                                    {% endfor %}
-                                </ul>
-                            </div>
-                            <div class="card-footer">
-                                <button class="btn btn-info btnSubmitSondage" data-id="{{ sondage.id }}">Voter</button>
-                            </div>
-                        </div>
-                        {% endif %}
-                    {% endfor %}
-                </section>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
+    <title>Association ESGI</title>
 
-            {% endif %}
+    <!-- Custom fonts for this template-->
+    <link href="{{ asset('assets/fontawesome-free/css/all.css') }}" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
-            {% if cours is defined %}
-                <section id="cours" class="col-sm-12 col-md-6 row">
-                    {% for cour in cours %}
-                        <div class="col-md-4">
-                            <div class="card border-primary">
-                                <div class="card-body">
-                                    <h5 class="card-title">{{ cour.name }}</h5>
-                                    <small class="card-subtitle text-muted">{{ cour.date|localizeddate('medium', 'none', 'fr') }}</small>
-                                    <p class="card-text">{{ cour.message|slice(0,50)|raw }}</p>
-                                </div>
-                                <div class="card-footer">
-                                    <a href="{{ path('cours_show', {'id' : cour.id}) }}" >Voirs plus</a>
-                                </div>
-                            </div>
-                        </div>
-                    {% endfor %}
-                </section>
-            {% endif %}
-        </div>
+    <!-- Custom styles for this template-->
+    <link href="{{ asset('styles/css/sb-admin-2.css') }}" rel="stylesheet">
+
+    {% block styles %}
     {% endblock %}
-</main>
-<footer>
 
-</footer>
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-<script src="/scripts/sondage.js"></script>
-{% block javascripts %}{% endblock %}
+</head>
+
+<body id="page-top">
+
+<!-- Page Wrapper -->
+<div id="wrapper">
+
+    <!-- Sidebar -->
+    {% include("partials/sidebar.html.twig") %}
+    <!-- End of Sidebar -->
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+        <!-- Main Content -->
+        <div id="content">
+
+            <!-- Topbar -->
+            {% include("partials/nav.html.twig") %}
+            <!-- End of Topbar -->
+
+            <!-- Begin Page Content -->
+            {% block body %}{% endblock %}
+            <!-- /.container-fluid -->
+
+        </div>
+        <!-- End of Main Content -->
+
+        <!-- Footer -->
+        <footer class="sticky-footer bg-white">
+            <div class="container my-auto">
+                <div class="copyright text-center my-auto">
+                    <span>Copyright &copy; Your Website 2019</span>
+                </div>
+            </div>
+        </footer>
+        <!-- End of Footer -->
+
+    </div>
+    <!-- End of Content Wrapper -->
+
+</div>
+<!-- End of Page Wrapper -->
+
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
+
+<!-- Logout Modal-->
+{% include("modals/logout.html.twig") %}
+
+<!-- Bootstrap core JavaScript-->
+<script src="{{ asset('startbootstrap-sb-admin-2-gh-pages/vendor/jquery/jquery.min.js')}}"></script>
+<script src="{{ asset('startbootstrap-sb-admin-2-gh-pages/vendor/bootstrap/js/bootstrap.min.js')}}"></script>
+
+<!-- Core plugin JavaScript-->
+<script src="{{ asset('startbootstrap-sb-admin-2-gh-pages/vendor/jquery-easing/jquery.easing.min.js')}}"></script>
+
+<!-- Custom scripts for all pages-->
+<script src="{{ asset('scripts/sb-admin-2.js') }}"></script>
+
+<!-- Page level plugins -->
+<script src="{{ asset('startbootstrap-sb-admin-2-gh-pages/vendor/chart.js/Chart.min.js')}}"></script>
+
+<!-- Page level custom scripts -->
+<script src="{{ asset('startbootstrap-sb-admin-2-gh-pages/js/demo/chart-pie-demo.js')}}"></script>
+<script src="{{ asset('startbootstrap-sb-admin-2-gh-pages/js/demo/chart-area-demo.js')}}"></script>
+
+{% block javascript %}
+{% endblock %}
+
 </body>
+
 </html>

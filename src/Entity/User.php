@@ -71,6 +71,11 @@ class User implements UserInterface
      */
     private $sondageAnswer;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Association", mappedBy="participants")
+     */
+    private $associations;
+
     public function __construct()
     {
         $this->point = 0;
@@ -79,6 +84,7 @@ class User implements UserInterface
         $this->sondageAnswer = new ArrayCollection();
         $this->createdAt = new \DateTime();
         $this->updatedAt = new \DateTime();
+        $this->associations = new ArrayCollection();
     }
 
     public function __toString()
@@ -278,6 +284,34 @@ class User implements UserInterface
             if ($sondageAnswer->getUsers() === $this) {
                 $sondageAnswer->setUsers(null);
             }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Association[]
+     */
+    public function getAssociations(): Collection
+    {
+        return $this->associations;
+    }
+
+    public function addAssociation(Association $association): self
+    {
+        if (!$this->associations->contains($association)) {
+            $this->associations[] = $association;
+            $association->addParticipant($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAssociation(Association $association): self
+    {
+        if ($this->associations->contains($association)) {
+            $this->associations->removeElement($association);
+            $association->removeParticipant($this);
         }
 
         return $this;
