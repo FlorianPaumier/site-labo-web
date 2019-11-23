@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\BackEnd;
 
 use App\Entity\Sondage;
 use App\Entity\SondageAnswer;
@@ -16,11 +16,12 @@ use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @Route("/sondage")
+ * @IsGranted("ROLE_ADMIN")
  */
 class SondageController extends AbstractController
 {
     /**
-     * @Route("/", name="sondage_index", methods={"GET"})
+     * @Route("/", name="admin_sondage_index", methods={"GET"})
      */
     public function index(SondageRepository $sondageRepository): Response
     {
@@ -30,7 +31,7 @@ class SondageController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="sondage_new", methods={"GET","POST"})
+     * @Route("/new", name="admin_sondage_new", methods={"GET","POST"})
      * @IsGranted("ROLE_ADMIN")
      */
     public function new(Request $request): Response
@@ -44,7 +45,7 @@ class SondageController extends AbstractController
             $entityManager->persist($sondage);
             $entityManager->flush();
 
-            return $this->redirectToRoute('sondage_index');
+            return $this->redirectToRoute('admin_sondage_index');
         }
 
         return $this->render('sondage/new.html.twig', [
@@ -54,7 +55,7 @@ class SondageController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="sondage_show", methods={"GET"})
+     * @Route("/{id}", name="admin_sondage_show", methods={"GET"})
      * @IsGranted("ROLE_ADMIN")
      */
     public function show(Sondage $sondage): Response
@@ -65,7 +66,7 @@ class SondageController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="sondage_edit", methods={"GET","POST"})
+     * @Route("/{id}/edit", name="admin_sondage_edit", methods={"GET","POST"})
      * @IsGranted("ROLE_ADMIN")
      */
     public function edit(Request $request, Sondage $sondage): Response
@@ -76,7 +77,7 @@ class SondageController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('sondage_index');
+            return $this->redirectToRoute('admin_sondage_index');
         }
 
         return $this->render('sondage/edit.html.twig', [
@@ -86,7 +87,7 @@ class SondageController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="sondage_delete", methods={"DELETE"})
+     * @Route("/{id}", name="admin_sondage_delete", methods={"DELETE"})
      * @IsGranted("ROLE_ADMIN")
      */
     public function delete(Request $request, Sondage $sondage): Response
@@ -97,11 +98,11 @@ class SondageController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('sondage_index');
+        return $this->redirectToRoute('admin_sondage_index');
     }
 
     /**
-     * @Route("/{id}/answer", name="sondage_user_answer", methods={"POST"})
+     * @Route("/{id}/answer", name="admin_sondage_user_answer", methods={"POST"})
      */
     public function answer(Request $request, Sondage $sondage){
         $data = json_decode(

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\FrontEnd;
 
 use App\Entity\SondageAnswer;
 use App\Form\SondageAnswerType;

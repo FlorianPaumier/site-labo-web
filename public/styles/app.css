@@ -111,4 +111,8 @@ td {
   display: none;
 }
 
+#events {
+  min-height: 50vh;
+}
+
 /*# sourceMappingURL=app.css.map */

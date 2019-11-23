@@ -3,7 +3,8 @@ security:
         App\Entity\User:
             algorithm: auto
     role_hierarchy:
-        ROLE_ADMIN:       ROLE_USER
+        ROLE_ADMIN:             ROLE_USER
+        ROLE_SUPER_ADMIN:       ROLE_ADMIN
 
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
@@ -37,9 +38,6 @@ security:
     access_control:
         - { path: ^/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/register$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/user/me, roles: ROLE_USER }
-        - { path: ^/user/reset_password, roles: ROLE_USER }
-        - { path: ^/cours/\d+, roles: ROLE_USER }
-        - { path: ^/sondage, roles: ROLE_USER }
-        - { path: ^/$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/, roles: ROLE_ADMIN }
+        - { path: ^/forget-password, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/admin, roles: ["ROLE_ADMIN", "ROLE_SUPER_ADMIN"] }
+        - { path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY }

@@ -1,3 +1,12 @@
-controllers:
-    resource: ../../src/Controller/
+backend_controllers:
+    resource: ../../src/Controller/BackEnd
+    type: annotation
+    prefix: "/admin"
+
+frontend_controllers:
+    resource: ../../src/Controller/FrontEnd
+    type: annotation
+
+base_controllers:
+    resource: ../../src/Controller/Base
     type: annotation

@@ -76,6 +76,11 @@ class User implements UserInterface
      */
     private $associations;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $thumbnail;
+
     public function __construct()
     {
         $this->point = 0;
@@ -313,6 +318,18 @@ class User implements UserInterface
             $this->associations->removeElement($association);
             $association->removeParticipant($this);
         }
+
+        return $this;
+    }
+
+    public function getThumbnail(): ?string
+    {
+        return $this->thumbnail;
+    }
+
+    public function setThumbnail(?string $thumbnail): self
+    {
+        $this->thumbnail = $thumbnail;
 
         return $this;
     }

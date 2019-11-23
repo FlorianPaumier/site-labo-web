@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\BackEnd;
 
 use App\Entity\Themes;
 use App\Form\ThemesType;
 use App\Repository\ThèmesRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -27,6 +28,7 @@ class ThemesController extends AbstractController
 
     /**
      * @Route("/new", name="themes_new", methods={"GET","POST"})
+     * @IsGranted("ROLE_ADMIN")
      */
     public function new(Request $request): Response
     {
@@ -60,6 +62,7 @@ class ThemesController extends AbstractController
 
     /**
      * @Route("/{id}/edit", name="themes_edit", methods={"GET","POST"})
+     * @IsGranted("ROLE_ADMIN")
      */
     public function edit(Request $request, Themes $theme): Response
     {
@@ -80,6 +83,7 @@ class ThemesController extends AbstractController
 
     /**
      * @Route("/{id}", name="themes_delete", methods={"DELETE"})
+     * @IsGranted("ROLE_ADMIN")
      */
     public function delete(Request $request, Themes $theme): Response
     {

@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\BackEnd;
 
 use App\Entity\Cours;
 use App\Form\CoursEditType;
 use App\Form\CoursType;
 use App\Repository\CoursRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,6 +19,8 @@ class CoursController extends AbstractController
 {
     /**
      * @Route("/", name="cours_index", methods={"GET"})
+     * @param CoursRepository $coursRepository
+     * @return Response
      */
     public function index(CoursRepository $coursRepository): Response
     {
@@ -28,6 +31,8 @@ class CoursController extends AbstractController
 
     /**
      * @Route("/new", name="cours_new", methods={"GET","POST"})
+     * @param Request $request
+     * @return Response
      */
     public function new(Request $request): Response
     {
@@ -51,6 +56,8 @@ class CoursController extends AbstractController
 
     /**
      * @Route("/{id}", name="cours_show", methods={"GET"})
+     * @param Cours $cour
+     * @return Response
      */
     public function show(Cours $cour): Response
     {
@@ -61,6 +68,9 @@ class CoursController extends AbstractController
 
     /**
      * @Route("/{id}/edit", name="cours_edit", methods={"GET","POST"})
+     * @param Request $request
+     * @param Cours $cour
+     * @return Response
      */
     public function edit(Request $request, Cours $cour): Response
     {
@@ -81,6 +91,9 @@ class CoursController extends AbstractController
 
     /**
      * @Route("/{id}", name="cours_delete", methods={"DELETE"})
+     * @param Request $request
+     * @param Cours $cour
+     * @return Response
      */
     public function delete(Request $request, Cours $cour): Response
     {

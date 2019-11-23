@@ -7,7 +7,9 @@
 
 // any CSS you require will output into a single css file (app.css in this case)
 require('../css/app.css');
-require('../../node_modules/foundation-sites/dist/css/foundation.css');
+const $ = require('jquery');
+const bootstrap = require('bootstrap');
+const Chart = require('chart.js');
 
 
 // Need jQuery? Install it with "yarn add jquery", then uncomment to require it.

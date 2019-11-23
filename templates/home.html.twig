@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <section id="events"></section>
+    <section id="associations">
+        {% for association in associations %}
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card border-left-warning shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">{{ association.name}}</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ association.description|slice(50,true) }}</div>
+                            </div>
+                            <div class="col-auto">
+                                <img src="{{ association.logo }}" alt="logo association">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </section>
+{% endblock %}

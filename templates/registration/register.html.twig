@@ -3,9 +3,44 @@
 {% block title %}Register{% endblock %}
 
 {% block body %}
-    <h1>Register</h1>
-    {{ form_start(registrationForm) }}
-        {{ form_widget(registrationForm) }}
-        <button class="btn">Register</button>
-    {{ form_end(registrationForm) }}
+    <div class="container">
+
+        <div class="card o-hidden border-0 shadow-lg my-5">
+            <div class="card-body p-0">
+                <!-- Nested Row within Card Body -->
+                <div class="row">
+                    <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
+                    <div class="col-lg-7">
+                        <div class="p-5">
+                            <div class="text-center">
+                                <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
+                            </div>
+
+                            <h1>Register</h1>
+                            {{ form_start(registrationForm) }}
+                            {{ form_widget(registrationForm) }}
+                            <button type="submit" class="btn btn-primary btn-user btn-block mt-3">Register</button>
+
+                            <!--hr>
+                            <a href="index.html" class="btn btn-google btn-user btn-block">
+                                <i class="fab fa-google fa-fw"></i> Register with Google
+                            </a>
+                            <a href="index.html" class="btn btn-facebook btn-user btn-block">
+                                <i class="fab fa-facebook-f fa-fw"></i> Register with Facebook
+                            </a-->
+                            {{ form_end(registrationForm) }}
+                            <hr>
+                            <div class="text-center">
+                                <a class="small" href="{{ path('user_reset_password') }}">Forgot Password?</a>
+                            </div>
+                            <div class="text-center">
+                                <a class="small" href="{{ path('app_login') }}">Already have an account? Login!</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
 {% endblock %}

@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\BackEnd;
 
 use App\Entity\Emails;
 use App\Form\EmailsType;
 use App\Repository\EmailsRepository;
 use App\Services\EmailManager;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,11 +14,12 @@ use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @Route("/emails")
+ * @IsGranted("ROLE_ADMIN")
  */
 class EmailsController extends AbstractController
 {
     /**
-     * @Route("/", name="emails_index", methods={"GET"})
+     * @Route("/", name="admin_emails_index", methods={"GET"})
      * @param EmailsRepository $emailsRepository
      * @return Response
      */
@@ -29,7 +31,7 @@ class EmailsController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="emails_new", methods={"GET","POST"})
+     * @Route("/new", name="admin_emails_new", methods={"GET","POST"})
      * @param Request $request
      * @return Response
      */
@@ -44,7 +46,7 @@ class EmailsController extends AbstractController
             $entityManager->persist($email);
             $entityManager->flush();
 
-            return $this->redirectToRoute('emails_index');
+            return $this->redirectToRoute('admin_emails_index');
         }
 
         return $this->render('emails/new.html.twig', [
@@ -54,7 +56,7 @@ class EmailsController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="emails_show", methods={"GET"})
+     * @Route("/{id}", name="admin_emails_show", methods={"GET"})
      * @param Emails $email
      * @return Response
      */
@@ -66,7 +68,7 @@ class EmailsController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="emails_edit", methods={"GET","POST"})
+     * @Route("/{id}/edit", name="admin_emails_edit", methods={"GET","POST"})
      * @param Request $request
      * @param Emails $email
      * @return Response
@@ -79,7 +81,7 @@ class EmailsController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('emails_index');
+            return $this->redirectToRoute('admin_emails_index');
         }
 
         return $this->render('emails/edit.html.twig', [
@@ -89,7 +91,7 @@ class EmailsController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="emails_delete", methods={"DELETE"})
+     * @Route("/{id}", name="admin_emails_delete", methods={"DELETE"})
      * @param Request $request
      * @param Emails $email
      * @return Response
@@ -102,11 +104,11 @@ class EmailsController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('emails_index');
+        return $this->redirectToRoute('admin_emails_index');
     }
 
     /**
-     * @Route("/send/{id}", name="emails_send")
+     * @Route("/send/{id}", name="admin_emails_send")
      * @param Request $request
      * @param EmailManager $emailManager
      * @param Emails $emails
@@ -115,6 +117,6 @@ class EmailsController extends AbstractController
     public function send(Request $request,EmailManager $emailManager,  Emails $emails)
     {
         $emailManager->send($emails);
-        return  $this->redirectToRoute('emails_index');
+        return  $this->redirectToRoute('admin_emails_index');
     }
 }
