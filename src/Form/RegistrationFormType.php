@@ -35,11 +35,13 @@ class RegistrationFormType extends AbstractType
                 "attr" => [
                     "class" => "form-control form-control-user"
                 ],
+                "label" => "Nom Prénom",
             ])
             ->add("class", TextType::class, [
                 "attr" => [
                     "class" => "form-control form-control-user"
                 ],
+                "label" => "Classe"
             ])
             ->add('plainPassword', RepeatedType::class, [
                 // instead of being set onto the object directly,
@@ -50,13 +52,13 @@ class RegistrationFormType extends AbstractType
                 ],
                 'mapped' => false,
                 'first_options' => array(
-                    'label' => 'Password',
+                    'label' => 'Mot de passe',
                     "attr" => [
                         "class" => "form-control form-control-user"
                     ],
                 ),
                 'second_options' => array(
-                    'label' => 'Repeat Password',
+                    'label' => 'Confirmation mot de passe',
                     "attr" => [
                         "class" => "form-control form-control-user"
                     ],

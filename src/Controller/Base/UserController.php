@@ -3,6 +3,7 @@
 namespace App\Controller\Base;
 
 use App\Entity\User;
+use App\Form\ForgotPasswordType;
 use App\Form\ResetPasswordType;
 use App\Form\UserType;
 use App\Repository\UserRepository;
@@ -83,6 +84,23 @@ class UserController extends AbstractController
         ));
     }
 
+    /**
+     * @param Request $request
+     * @Route("/forgot-password")
+     */
+    public function forgotPassword(Request $request)
+    {
+        $form = $this->createForm(ForgotPasswordType::class);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+
+        }
+
+        return $this->render('user/password.html.twig', array(
+            'form' => $form->createView(),
+        ));
+    }
     /**
      * @Route("/new", name="user_new", methods={"GET","POST"})
      * @IsGranted("ROLE_SUPER_ADMIN")

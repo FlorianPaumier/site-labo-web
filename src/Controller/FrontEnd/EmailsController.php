@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\Frontend;
+namespace App\Controller\FrontEnd;
 
 use App\Entity\Emails;
 use App\Form\EmailsType;

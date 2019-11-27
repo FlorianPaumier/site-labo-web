@@ -81,6 +81,12 @@ class User implements UserInterface
      */
     private $thumbnail;
 
+    /**
+     * @var string
+     * @ORM\Column(type="string" length=255, nullable=true)
+     */
+    private $token;
+
     public function __construct()
     {
         $this->point = 0;
@@ -333,4 +339,24 @@ class User implements UserInterface
 
         return $this;
     }
+
+    /**
+     * @return string
+     */
+    public function getToken(): string
+    {
+        return $this->token;
+    }
+
+    /**
+     * @param string $token
+     * @return User
+     */
+    public function setToken(string $token): User
+    {
+        $this->token = $token;
+        return $this;
+    }
+
+
 }

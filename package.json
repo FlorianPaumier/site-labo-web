@@ -17,7 +17,11 @@
   },
   "homepage": "https://github.com/FlorianPaumier/site-labo-web#readme",
   "dependencies": {
-    "@symfony/webpack-encore": "^0.28.0"
+    "@symfony/webpack-encore": "^0.28.0",
+    "bootstrap": "^4.3.1",
+    "chart.js": "^2.9.3",
+    "jquery": "^3.4.1",
+    "jquery.easing": "^1.4.1"
   },
   "devDependencies": {
     "node-sass": "^4.13.0",
