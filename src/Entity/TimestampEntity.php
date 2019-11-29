@@ -15,12 +15,12 @@ trait TimestampEntity
 {
 
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="date", options={"default" : "01-01-2019"})
      */
     private $createdAt;
 
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="date", options={"default" : "01-01-2019"})
      */
     private $updatedAt;
 

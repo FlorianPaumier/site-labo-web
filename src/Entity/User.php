@@ -83,9 +83,14 @@ class User implements UserInterface
 
     /**
      * @var string
-     * @ORM\Column(type="string" length=255, nullable=true)
+     * @ORM\Column(type="string" ,length=255, nullable=true)
      */
     private $token;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Thread", mappedBy="user")
+     */
+    private $threads;
 
     public function __construct()
     {
@@ -96,6 +101,7 @@ class User implements UserInterface
         $this->createdAt = new \DateTime();
         $this->updatedAt = new \DateTime();
         $this->associations = new ArrayCollection();
+        $this->threads = new ArrayCollection();
     }
 
     public function __toString()
@@ -355,6 +361,34 @@ class User implements UserInterface
     public function setToken(string $token): User
     {
         $this->token = $token;
+        return $this;
+    }
+
+    /**
+     * @return Collection|Thread[]
+     */
+    public function getThreads(): Collection
+    {
+        return $this->threads;
+    }
+
+    public function addThread(Thread $thread): self
+    {
+        if (!$this->threads->contains($thread)) {
+            $this->threads[] = $thread;
+            $thread->addUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeThread(Thread $thread): self
+    {
+        if ($this->threads->contains($thread)) {
+            $this->threads->removeElement($thread);
+            $thread->removeUser($this);
+        }
+
         return $this;
     }
 
