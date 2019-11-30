@@ -19,6 +19,11 @@ body, html {
   width: 1170px;
 }
 
+.center {
+  margin-left: auto;
+  margin-right: auto;
+}
+
 body, html {
   margin: 0;
   padding: 0;
@@ -38,6 +43,11 @@ body, html {
   margin: 0 auto;
   padding: 0 15px;
   width: 1170px;
+}
+
+.center {
+  margin-left: auto;
+  margin-right: auto;
 }
 
 a.btn {

@@ -15,30 +15,32 @@ class ChatController extends AbstractController
 {
 
     /**
-     * @Route("/", name="app_chat_index")
+     * @Route("/", name="app_chat_index", methods={"GET"})
      */
     public function index()
     {
-        return $this->render(":chat:layout.html.twig");
+        return $this->render("chat/layout.html.twig", [
+            "threads" => ["", "", "", ""],
+        ]);
     }
     /**
-     * @Route("/new", name="app_chat_new")
+     * @Route("/new", name="app_chat_new", methods={"POST"})
      */
     public function new()
     {
-
+        return true;
     }
 
     /**
-     * @Route("/delete", name="app_chat_delete")
+     * @Route("/delete", name="app_chat_delete",methods={"DELETE"})
      */
     public function delete()
     {
-
+        return true;
     }
 
     /**
-     * @Route("/talk", name="app_chat_talk")
+     * @Route("/talk", name="app_chat_talk", methods={"POST"})
      */
     public function talk(){
 
