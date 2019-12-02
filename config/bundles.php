@@ -17,4 +17,5 @@ return [
     FOS\CKEditorBundle\FOSCKEditorBundle::class => ['all' => true],
     Vich\UploaderBundle\VichUploaderBundle::class => ['all' => true],
     FOS\JsRoutingBundle\FOSJsRoutingBundle::class => ['all' => true],
+    JMS\SerializerBundle\JMSSerializerBundle::class => ['all' => true],
 ];

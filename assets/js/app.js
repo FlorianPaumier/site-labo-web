@@ -7,10 +7,7 @@
 
 // any CSS you require will output into a single css file (app.css in this case)
 require('../css/app.css');
-const $ = require('jquery');
-const bootstrap = require('bootstrap');
-const Chart = require('chart.js');
-
+import $ from 'jquery';
 
 // Need jQuery? Install it with "yarn add jquery", then uncomment to require it.
 // const $ = require('jquery');

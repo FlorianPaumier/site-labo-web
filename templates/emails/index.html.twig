@@ -22,9 +22,9 @@
                 <td>{{ email.title }}</td>
                 <td>{{ email.body }}</td>
                 <td>
-                    <a class="btn btn-blue" href="{{ path('emails_show', {'id': email.id}) }}">show</a>
-                    <a class="btn btn-blue" href="{{ path('emails_edit', {'id': email.id}) }}">edit</a>
-                    <a class="btn btn-danger" href="{{ path('emails_send', {'id': email.id}) }}">Send</a>
+                    <a class="btn btn-blue" href="{{ path('admin_emails_show', {'id': email.id}) }}">show</a>
+                    <a class="btn btn-blue" href="{{ path('admin_emails_edit', {'id': email.id}) }}">edit</a>
+                    <a class="btn btn-danger" href="{{ path('admin_emails_send', {'id': email.id}) }}">Send</a>
                 </td>
             </tr>
         {% else %}
@@ -36,5 +36,5 @@
     </table>
     </div>
 
-    <a class="btn btn-success" href="{{ path('emails_new') }}">Create new</a>
+    <a class="btn btn-success" href="{{ path('admin_emails_new') }}">Create new</a>
 {% endblock %}

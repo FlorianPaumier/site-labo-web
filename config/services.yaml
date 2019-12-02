@@ -33,3 +33,5 @@ services:
         class: Twig_Extensions_Extension_Intl
         tags:
             - { name: twig.extension }
+    app.connection_pool:
+        class: App\Services\ConnectionsPool

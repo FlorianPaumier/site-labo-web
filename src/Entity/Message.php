@@ -29,6 +29,12 @@ class Message
      */
     private $author;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Thread", inversedBy="messages")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $thread;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -54,6 +60,18 @@ class Message
     public function setAuthor(?User $author): self
     {
         $this->author = $author;
+
+        return $this;
+    }
+
+    public function getThread(): ?Thread
+    {
+        return $this->thread;
+    }
+
+    public function setThread(?Thread $thread): self
+    {
+        $this->thread = $thread;
 
         return $this;
     }

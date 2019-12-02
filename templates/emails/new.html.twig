@@ -5,7 +5,13 @@
 {% block body %}
     <h1>Create new Emails</h1>
 
-    {{ include('emails/_form.html.twig') }}
+    <section class="container">
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <button class="btn">New</button>
+        {{ form_end(form) }}
+    </section>
 
-    <a href="{{ path('emails_index') }}">back to list</a>
+
+    <a href="{{ path('admin_emails_index') }}">back to list</a>
 {% endblock %}
