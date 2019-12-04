@@ -33,3 +33,8 @@ services:
         class: Twig_Extensions_Extension_Intl
         tags:
             - { name: twig.extension }
+    vich_clean_namer:
+        class: App\Services\VichCleanNamer
+        public: true
+        tags:
+            - { name: namer }

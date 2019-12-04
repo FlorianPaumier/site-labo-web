@@ -20,7 +20,7 @@ class AssociationController extends AbstractController
      * @Route("/{id}", name="app_association_show")
      */
     public function show(Association $association){
-        return $this->render("association/show.html.twig", [
+        return $this->render("frontend/association/show.html.twig", [
             "association" => $association,
         ]);
     }

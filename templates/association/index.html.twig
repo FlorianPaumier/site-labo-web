@@ -10,7 +10,6 @@
             <tr>
                 <th>Id</th>
                 <th>Name</th>
-                <th>Logo</th>
                 <th>Description</th>
                 <th>actions</th>
             </tr>
@@ -20,7 +19,6 @@
             <tr>
                 <td>{{ association.id }}</td>
                 <td>{{ association.name }}</td>
-                <td>{{ association.logo }}</td>
                 <td>{{ association.description }}</td>
                 <td>
                     <a href="{{ path('association_show', {'id': association.id}) }}">show</a>

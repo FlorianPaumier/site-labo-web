@@ -117,6 +117,9 @@
             "config/routes/fos_js_routing.yaml"
         ]
     },
+    "gedmo/doctrine-extensions": {
+        "version": "v2.4.38"
+    },
     "jdorn/sql-formatter": {
         "version": "v1.2.17"
     },

@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Association{% endblock %}
+
+{% block body %}
+    <h1 class="text-center">Association : {{ association.name }}</h1>
+
+    <section class="container">
+
+        {% if association.logo is not null %}
+            <img src="{{ vich_uploader_asset(association, "logo") }}" alt="Logo Association">
+        {% endif %}
+
+        <section>
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h1 class="m-0 font-weight-bold text-primary h6">Description</h1>
+                </div>
+                <div class="card-body">
+                    {{ association.description|raw }}
+                </div>
+            </div>
+            <h1></h1>
+        </section>
+
+        <section>
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h1 class="m-0 font-weight-bold text-primary h6">Charte de l'association</h1>
+                </div>
+                <div class="card-body">
+                    {{ association.rules|raw }}
+                </div>
+            </div>
+
+        </section>
+    </section>
+{% endblock %}
