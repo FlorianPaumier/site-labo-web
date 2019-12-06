@@ -5,12 +5,18 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\AssociationRepository")
+ * @Vich\Uploadable()
  */
 class Association
 {
+
+    use TimestampEntity;
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -24,14 +30,24 @@ class Association
     private $name;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Vich\UploadableField(fileNameProperty="logo_name", mapping="association")
      */
-    private $logo;
+    private $logoFile;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true, name="logo_name")
+     */
+    private $logoName;
 
     /**
      * @ORM\Column(type="text", nullable=true)
      */
     private $description;
+
+    /**
+     * @ORM\Column(type="string", length=15, nullable=true)
+     */
+    private $color;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User")
@@ -63,6 +79,7 @@ class Association
      */
     private $events;
 
+
     public function __construct()
     {
         $this->participants = new ArrayCollection();
@@ -86,15 +103,30 @@ class Association
         return $this;
     }
 
-    public function getLogo(): ?string
+    public function getLogoFile()
     {
-        return $this->logo;
+        return $this->logoFile;
     }
 
-    public function setLogo(?string $logo): self
+    public function setLogoFile(File $logoFile)
     {
-        $this->logo = $logo;
+        $this->logoFile = $logoFile;
 
+        if (null !== $logoFile) {
+            $this->updatedAt = new \DateTimeImmutable();
+        }
+
+        return $this;
+    }
+
+    public function getLogoName()
+    {
+        return $this->logoName;
+    }
+
+    public function setLogoName(string $logoName)
+    {
+        $this->logoName = $logoName;
         return $this;
     }
 
@@ -211,6 +243,18 @@ class Association
                 $event->setAssociation(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getColor(): ?string
+    {
+        return $this->color;
+    }
+
+    public function setColor(?string $color): self
+    {
+        $this->color = $color;
 
         return $this;
     }

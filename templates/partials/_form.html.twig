@@ -39,13 +39,12 @@
                                 <tfoot>
                                 <tr>
                                     <td colspan="3" class="vich-errors">
-                                        <span class="help-block" style="color: red;">Erreur{% if errors|length > 1 %}s{% endif %} : </span>
-
-                                        <ul style="color: red;">
-                                            {% for error in errors %}
-                                                <li>{{ error.message }}</li>
-                                            {% endfor %}
-                                        </ul>
+                                        {% for error in errors %}
+                                            <span class="help-block">
+                                            Erreurs :<br>
+                                            <li>{{ error.message }}</li>
+                                        </span>
+                                        {% endfor %}
                                     </td>
                                 </tr>
                                 </tfoot>
@@ -132,6 +131,7 @@
 {%- endblock email_widget -%}
 
 {% block form_widget_simple %}
+    {% set display_errors = true %}
     {% spaceless %}
         {% set type = type|default('text') %}
         {% if type == 'time' %}
@@ -153,24 +153,24 @@
             <div class="input-group">
                 {% endif %}
                 {% if prefix is defined %}
-                    <span class="input-group-addon btn">
-                    <i class="fa fa-{{ prefix }} font-dark"></i>
-                </span>
+                    <span class="input-group-addon">
+                        <i class="fa fa-{{ prefix }} font-dark"></i>
+                    </span>
                 {% endif %}
                 {% if vich_file == 'false' %}
                     {% set attr = attr|merge({'class': (attr.class|default('') ~ ' form-control clearfix')|trim}) %}
                 {% endif %}
                 {% if attr.maxlength is defined  and attr.maxlength > 0 %}
-                    {% set attr = attr|merge({'class': (attr.class|default('') ~ ' has-max-length')|trim}) %}
+                    {#{% set attr = attr|merge({'class': (attr.class|default('') ~ ' has-max-length')|trim}) %}#}
                 {% endif %}
                 {% if attr.maxlength is defined and attr.maxlength > 0 %}
-                    <span class="length-count" data-max="{{ attr.maxlength }}">{{ value|length }}/{{ attr.maxlength }}</span>
+                    {#<span class="length-count" data-max="{{ attr.maxlength }}">{{ value|length }}/{{ attr.maxlength }}</span>#}
                 {% endif %}
                 <input type="{{ type }}" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
                 {% if suffix is defined %}
-                    <span class="input-group-addon btn">
-                    <i class="fa fa-{{ suffix }} font-dark"></i>
-                </span>
+                    <span class="input-group-addon">
+                        <i class="fa fa-{{ suffix }} font-dark"></i>
+                    </span>
                 {% endif %}
                 {% if prefix is defined or suffix is defined %}
             </div>
@@ -233,13 +233,9 @@
                 {% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' required')|trim}) %}
             {% endif %}
             {% if label is not empty %}
-                {% if multiple_child is not defined or not multiple_child %}
-                    <div class="col-md-12">
-                {% endif %}
-                <label {% for attrname, attrvalue in label_attr %}{{ attrname }}="{{ attrvalue }}"{% endfor %}>{{ translation_domain is same as(false) ? label|capitalize : label|trans({}, translation_domain)|capitalize }}</label>
-                {% if multiple_child is not defined or not multiple_child %}
-                    </div>
-                {% endif %}
+                <div class="col-md-12">
+                    <label {% for attrname, attrvalue in label_attr %}{{ attrname }}="{{ attrvalue }}"{% endfor %}>{{ translation_domain is same as(false) ? label|capitalize : label|trans({}, translation_domain)|capitalize }}</label>
+                </div>
             {% endif %}
         {% endif %}
     {% endif %}
@@ -269,6 +265,7 @@
             <div class="{% if field_class is defined and field_class is not null %}{{ field_class }}{% else %}col-md-12{% endif %}">
                 <div class="form-group row {% if errors|length > 0 %}has-error{% endif %}">
                     {{ form_label(form) }}
+
                     <div {{ block('widget_container_attributes') }} class="col-md-12">
                         <div class="radio-list">
                             {% for child in form %}
@@ -305,13 +302,6 @@
             {%- set options = choices -%}
             {{- block('choice_widget_options') -}}
         </select>
-        {% if errors|length > 0 and display_errors is defined and display_errors == true %}
-            {% for error in errors %}
-                <span class="help-block">
-                       <li>{{ error.message }}</li>
-                   </span>
-            {% endfor %}
-        {% endif %}
     </div>
 
 {%- endblock choice_widget_collapsed -%}
@@ -405,7 +395,6 @@
 {% endblock %}
 
 {% block textarea_widget %}
-    {% set attr = attr|merge({'class': (attr.class|default('') ~ ' form-control')|trim}) %}
     {% if attr.maxlength is defined  and attr.maxlength > 0 %}
         {% set attr = attr|merge({'class': (attr.class|default('') ~ ' has-max-length')|trim}) %}
     {% endif %}
@@ -413,7 +402,7 @@
         {% if attr.maxlength is defined and attr.maxlength > 0 %}
             <span class="length-count" data-max="{{ attr.maxlength }}">{{ value|length }}/{{ attr.maxlength }}</span>
         {% endif %}
-        <textarea {{ block('widget_attributes') }}>{{ value }}</textarea>
+        <textarea {{ block('widget_attributes') }} style="width: 100%;" rows="10">{{ value }}</textarea>
         {% if errors|length > 0 and display_errors is defined and display_errors == true %}
             {% for error in errors %}
                 <span class="help-block">
@@ -428,92 +417,3 @@
     {% if switcher is defined and switcher %}
         {% set attr = attr|merge({'class': (attr.class|default('') ~ ' switcher')|trim}) %}
     {% endif %}
-
-    {% if multiple_child is defined and multiple_child %}
-        <input type="checkbox" {{ block('widget_attributes') }}{% if value is defined %} value="{{ value }}"{% endif %}{% if checked %} checked="checked"{% endif %} />
-    {% else %}
-        <div class="col-md-12">
-            <input type="checkbox" {{ block('widget_attributes') }}{% if value is defined %} value="{{ value }}"{% endif %}{% if checked %} checked="checked"{% endif %} />
-        </div>
-    {% endif %}
-{%- endblock checkbox_widget -%}
-
-
-{% block collection_row %}
-    {% spaceless %}
-        {% if prototype is defined %}
-            {#{% set key = '__key__' %}#}
-            {% set display = false %}
-            {% set child = prototype %}
-            {% set prototype_name = '__name__' %}
-            {% set attr = attr|merge({'data-prototype': block('collection_item') }) %}
-
-            {% set attr = attr|merge({'class': (attr.class|default('') ~ ' panel-group accordion')|trim}) %}
-
-            {% if sortable %}
-                {% set attr = attr|merge({'class': (attr.class|default('') ~ ' form-collection-auto-sortable')|trim}) %}
-            {% endif %}
-
-        {% endif %}
-        <div class="{% if field_class is defined and field_class is not null %}{{ field_class }}{% else %}col-md-12{% endif %}">
-            <div class="form-group row collection">
-                {{ form_label(form) }}
-                {% if errors|length > 0 and display_errors is defined and display_errors == true %}
-                    {% for error in errors %}
-                        <div class="col-md-12">
-                            <div class="error-collection">
-                                <ul>
-                                    <li>{{ error.message }}</li>
-                                </ul>
-                            </div>
-                        </div>
-                    {% endfor %}
-                {% endif %}
-
-                <div class="col-md-12">
-                    <div {{ block('widget_container_attributes') }}>
-                        {{ block('collection_widget') }}
-                    </div>
-                </div>
-                <div class="col-md-12">
-                    <a href="#" class="btn btn-default form-collection-auto" data-key="{{ key }}" data-name="{{ prototype_name }}" data-collectionname="{{ form.vars.name }}"
-                       data-add-container="#{{ id }}" data-sortable="{% if sortable %}true{% else %}false{% endif %}">
-                        <i class="fa fa-plus"></i> Ajouter {{ add_text }}
-                    </a>
-                </div>
-            </div>
-        </div>
-    {% endspaceless %}
-{% endblock collection_row %}
-
-{% block collection_widget %}
-    {% spaceless %}
-        {% for key, child in form %}
-            {#{% set key = key - 1 %}#}
-            {% set display = true %}
-            {{ block('collection_item') }}
-        {% endfor %}
-    {% endspaceless %}
-{% endblock collection_widget %}
-
-{% block collection_item %}
-    <div class="panel panel-default collection-item-parent" {% if not display %}style="opacity: 0;"{% endif %}>
-        <div class="panel-heading">
-            <h4 class="panel-title">
-                <a class="accordion-toggle accordion-toggle-styled {% if display %}collapsed{% endif %}" data-toggle="collapse" data-parent="#{{ id }}" href="#collapse-{{ id }}_{{ key }}" aria-expanded="false">
-                    {{ element_title|trans }} {% if key matches '/^\\d+$/' %}{{ key + 1 }}{% else %}{{ key }}{% endif %}
-                </a>
-                <span class="form-collection-auto-delete">
-                    <i class="fa fa-trash-o" aria-hidden="true"></i>
-                </span>
-            </h4>
-        </div>
-        <div id="collapse-{{ id }}_{{ key }}" class="panel-collapse collapse {% if not display %}in{% endif %}">
-            <div class="panel-body">
-                <div class="form-group">
-                    {{ form_widget(child) }}
-                </div>
-            </div>
-        </div>
-    </div>
-{% endblock collection_item %}

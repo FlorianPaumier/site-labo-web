@@ -38,5 +38,8 @@ services:
         class: Twig_Extensions_Extension_Intl
         tags:
             - { name: twig.extension }
-    app.connection_pool:
-        class: App\Services\ConnectionsPool
+    vich_clean_namer:
+        class: App\Services\VichCleanNamer
+        public: true
+        tags:
+            - { name: namer }
