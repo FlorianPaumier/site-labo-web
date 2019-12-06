@@ -29,6 +29,11 @@ services:
     # this is the service's id
     app.email_manager:
         class: App\Services\EmailManager
+    app.socket_handler:
+        class: App\Services\SocketChatHandler
+        arguments:
+            - "127.0.0.1"
+            - "8000"
     twig.extension.intl:
         class: Twig_Extensions_Extension_Intl
         tags:

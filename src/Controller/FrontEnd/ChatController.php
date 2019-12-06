@@ -3,6 +3,7 @@
 
 namespace App\Controller\FrontEnd;
 
+use App\Services\SocketChatHandler;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -13,12 +14,21 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class ChatController extends AbstractController
 {
+    /**
+     * @var SocketChatHandler
+     */
+    private $chat;
 
     /**
      * @Route("/", name="app_chat_index", methods={"GET"})
      */
-    public function index()
+    public function index(SocketChatHandler $chat)
     {
+        $this->chat = $chat;
+
+        $this->chat->instance();
+        $this->chat->run();
+
         return $this->render("chat/layout.html.twig", [
             "threads" => ["", "", "", ""],
         ]);
