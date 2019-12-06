@@ -5,7 +5,14 @@
 {% block body %}
     <h1>Edit Emails</h1>
 
-    {{ include('emails/_form.html.twig', {'button_label': 'Update'}) }}
+    <section class="container">
+        {% form_theme 'partials/_form.html.twig' %}
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <button class="btn">Update</button>
+        {{ form_end(form) }}
+    </section>
+
 
     <a href="{{ path('emails_index') }}">back to list</a>
 

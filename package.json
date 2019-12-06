@@ -18,14 +18,16 @@
   "homepage": "https://github.com/FlorianPaumier/site-labo-web#readme",
   "dependencies": {
     "@symfony/webpack-encore": "^0.28.0",
-    "bootstrap": "^4.3.1",
-    "chart.js": "^2.9.3",
-    "jquery": "^3.4.1",
-    "jquery.easing": "^1.4.1"
+    "core-js": "3"
   },
   "devDependencies": {
+    "bootstrap": "^4.4.1",
+    "chart.js": "^2.9.3",
+    "jquery": "^3.4.1",
     "node-sass": "^4.13.0",
-    "sass-loader": "^7.3.1",
+    "popper.js": "^1.16.0",
+    "sass-loader": "^8.0.0",
+    "webpack": "^4.41.2",
     "webpack-notifier": "^1.8.0"
   }
 }

@@ -23,7 +23,19 @@ Encore
      * Each entry will result in one JavaScript file (e.g. app.js)
      * and one CSS file (e.g. app.css) if your JavaScript imports CSS.
      */
-    .addEntry('app', './assets/js/app.js')
+    .addEntry('js/app', './assets/js/app.js')
+    .addEntry('js/fosjsrouting', './assets/bundles/fosjsrouting/js/router.min.js')
+    //.addEntry('chat', './assets/js/chat.js')
+    .addEntry('js/fosjsroutes', './assets/js/fos_js_routes.json')
+    .addEntry('js/sbadmin', './assets/js/sb-admin-2.js')
+    .addEntry('js/sondage', './assets/js/sondage.js')
+    .addEntry('js/fontawesome', './assets/fontawesome-free/js/all.js')
+
+    .addStyleEntry('css/app', './assets/css/app.css')
+    .addStyleEntry('css/sbadmin', './assets/css/sb-admin-2.min.css')
+    .addStyleEntry('css/chat', './assets/css/chat.css')
+    .addStyleEntry('css/fontawesome', './assets/fontawesome-free/css/all.min.css')
+
 
     //.addEntry('page1', './assets/js/page1.js')
     //.addEntry('page2', './assets/js/page2.js')
