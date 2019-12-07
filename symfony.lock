@@ -123,9 +123,6 @@
             "config/routes/fos_js_routing.yaml"
         ]
     },
-    "gedmo/doctrine-extensions": {
-        "version": "v2.4.38"
-    },
     "guzzlehttp/psr7": {
         "version": "1.6.1"
     },
@@ -202,6 +199,9 @@
     },
     "ocramius/proxy-manager": {
         "version": "2.2.3"
+    },
+    "php": {
+        "version": "7.2"
     },
     "psr/cache": {
         "version": "1.0.1"

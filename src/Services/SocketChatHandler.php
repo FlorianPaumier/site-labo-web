@@ -28,8 +28,8 @@ class SocketChatHandler
 
     public function __construct($host = "127.0.0.1", $port = "8002")
     {
-        $this->loop = Factory::create();
-        $this->socket = new Server($host.":".$port, $this->loop);
+        //$this->loop = Factory::create();
+        //$this->socket = new Server($host.":".$port, $this->loop);
     }
 
     public function instance(){
@@ -49,7 +49,3 @@ class SocketChatHandler
         $this->loop->stop();
     }
 }
-
-$socket = new SocketChatHandler();
-$socket->instance();
-$socket->run();
