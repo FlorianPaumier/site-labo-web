@@ -20,7 +20,9 @@ class AssociationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', TextType::class)
+            ->add('name', TextType::class, [
+                "label" => "Nom"
+            ])
             ->add('logoFile', VichImageType::class, [
                 'label'             => 'Photo',
                 'allow_delete'      => true,
@@ -31,47 +33,60 @@ class AssociationType extends AbstractType
                 'data_class'        => null,
             ])
             ->add('description', CKEditorType::class,[
+                "label" =>      "description",
                 "required"          => false,
             ])
             ->add('president', EntityType::class, [
                 "required" => false,
+                "label" => "Président",
+                "choice_label" => "name",
                 "class" => User::class,
                 "attr" => [
-                    "class" => "select-2"
+                    "class" => "select-js"
                 ]
             ])
             ->add('assistant', EntityType::class, [
                 "required" => false,
                 "class" => User::class,
+                "label" => "Assistant",
+                "choice_label" => "name",
                 "attr" => [
-                    "class" => "select-2"
+                    "class" => "select-js"
                 ]
             ])
             ->add('category', EntityType::class, [
                 "required" => false,
                 "class" => Category::class,
+                "label" => "Catégory",
                 "attr" => [
-                    "class" => "select-2"
+                    "class" => "select-js"
                 ]
             ])
             ->add('rules', EntityType::class, [
                 "required" => false,
                 "class" => Rules::class,
                 "choice_label" => 'id',
+                "label" => "Charte",
                 "attr" => [
-                    "class" => "select-2"
+                    "class" => "select-js"
                 ]
             ])
             ->add('participants', EntityType::class, [
                 "required" => false,
                 "multiple" => true,
                 "class" => User::class,
+                "label" => "Participants",
+                "choice_label"=> "name",
                 "attr" => [
-                    "class" => "select-2"
+                    "class" => "select-js"
                 ]
             ])
             ->add("color", ColorType::class, [
+                "label" => "Couleur",
                 "required" => false,
+                "attr" => [
+                    "class" => "w-25"
+                ]
             ])
         ;
     }

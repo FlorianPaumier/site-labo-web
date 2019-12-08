@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\Association;
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
@@ -47,4 +48,17 @@ class UserRepository extends ServiceEntityRepository
         ;
     }
     */
+    public function findByAssociation(Association $association = null)
+    {
+        if(is_null($association)){
+            return [];
+        }
+
+        return $this->createQueryBuilder("u")
+            ->innerJoin("u.associations", "a")
+            ->where("a.id = :id")
+            ->setParameter("id", $association->getId())
+            ->getQuery()
+            ->getResult();
+    }
 }

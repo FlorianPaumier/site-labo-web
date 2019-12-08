@@ -46,6 +46,6 @@
     e.preventDefault();
   });
 
-  $('table.table').DataTable();
+  $('table.table-view').DataTable();
   $('select.select-js').select2();
 })(jQuery); // End of use strict

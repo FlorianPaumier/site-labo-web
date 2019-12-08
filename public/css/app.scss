@@ -1,4 +1,4 @@
-@import "css/variables";
+@import "variables";
 @import "button";
 
 header {
@@ -31,9 +31,10 @@ nav {
     }
   }
 }
-
-td {
-  max-width: 30vw;
+table {
+  td {
+    max-width: 30vw;
+  }
 }
 
 #cours {
@@ -47,20 +48,23 @@ td {
 
   .form-group input[type="radio"] + .btn-group > label span:first-child {
     display: none;
-  }
-  .form-group input[type="radio"] + .btn-group > label span:last-child {
-    display: inline-block;
+
+    .form-group input[type="radio"] + .btn-group > label span:last-child {
+      display: inline-block;
+    }
+
+    .form-group input[type="radio"]:checked + .btn-group > label span:first-child {
+      display: inline-block;
+    }
+
+    .form-group input[type="radio"]:checked + .btn-group > label span:last-child {
+      display: none;
+    }
   }
 
-  .form-group input[type="radio"]:checked + .btn-group > label span:first-child {
-    display: inline-block;
+  #events {
+    min-height: 50vh;
+    max-width: 50vw;
   }
-  .form-group input[type="radio"]:checked + .btn-group > label span:last-child {
-    display: none;
-  }
-}
-
-#events {
-  min-height: 50vh;
 }
 

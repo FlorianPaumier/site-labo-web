@@ -2,6 +2,7 @@
 
 namespace App\Controller\Base;
 
+use App\Entity\Association;
 use App\Entity\User;
 use App\Form\ForgotPasswordType;
 use App\Form\ResetPasswordType;
@@ -26,8 +27,18 @@ class UserController extends AbstractController
      */
     public function index(UserRepository $userRepository): Response
     {
+        /** @var User $user */
+        $user = $this->getUser();
+        $assoc = $this->getDoctrine()->getRepository(Association::class)->findByPresident($user);
+
+        if($this->isGranted("ROLE_SUPER_ADMIN")){
+            $users = $userRepository->findAll();
+        }else{
+            $users = $userRepository->findByAssociation($assoc);
+        }
+
         return $this->render('user/index.html.twig', [
-            'users' => $userRepository->findAll(),
+            'users' => $users,
         ]);
     }
 

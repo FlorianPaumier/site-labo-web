@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Association;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 
@@ -47,4 +48,13 @@ class AssociationRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function findByPresident(User $user)
+    {
+        return $this->createQueryBuilder("a")
+            ->where('a.president = :user')
+            ->setParameter("user", $user)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
 }
