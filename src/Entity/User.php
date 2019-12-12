@@ -6,11 +6,14 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
+ * @Vich\Uploadable()
  */
 class User implements UserInterface
 {
@@ -77,9 +80,14 @@ class User implements UserInterface
     private $associations;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Vich\UploadableField(fileNameProperty="thumbnail_name", mapping="profile")
      */
     private $thumbnail;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true, name="thumbnail_name")
+     */
+    private $thumbnailName;
 
     /**
      * @var string
@@ -334,15 +342,31 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getThumbnail(): ?string
+
+    public function getThumbnail()
     {
         return $this->thumbnail;
     }
 
-    public function setThumbnail(?string $thumbnail): self
+    public function setThumbnail(File $thumbnailFile)
     {
-        $this->thumbnail = $thumbnail;
+        $this->thumbnail = $thumbnailFile;
 
+        if (null !== $thumbnailFile) {
+            $this->updatedAt = new \DateTimeImmutable();
+        }
+
+        return $this;
+    }
+
+    public function getThumbnailName()
+    {
+        return $this->thumbnailName;
+    }
+
+    public function setThumbnailName(string $thumbnailName)
+    {
+        $this->thumbnailName = $thumbnailName;
         return $this;
     }
 

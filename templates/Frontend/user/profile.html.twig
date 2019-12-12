@@ -1,0 +1,100 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}User{% endblock %}
+
+{% block body %}
+    <section class="container">
+        <a href="{{ path('app_home') }}" class="btn btn-info">Accueil</a>
+
+        <h1 class="text-center">Mon profile</h1>
+        <div class="row">
+            <div class="col-xl-6 col-lg-6 col-md-4">
+
+                <div class="card o-hidden border-0 shadow-lg my-5">
+                    <div class="card-body p-0">
+                        <!-- Nested Row within Card Body -->
+                        <div class="row">
+                            {% if user.thumbnailName is not null %}
+                            <div class="col-sm-5 d-none d-lg-block">
+                                    <img src="{{ vich_uploader_asset(user, "thumbnail") }}" alt="Photo de profile">
+                            </div>
+                                {% else %}
+                                    <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
+                                {% endif %}
+                            <div class="col-sm-7">
+                                <div class="p-3">
+                                    <h1 class="h4 text-gray-900 mb-4">Mes informations</h1>
+                                    <table class="table-show">
+                                        <tbody>
+                                        <tr>
+                                            <th>Name</th>
+                                            <td>{{ user.name }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Email</th>
+                                            <td>{{ user.email }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Class</th>
+                                            <td>{{ user.class }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Point</th>
+                                            <td>{{ user.point }}</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-6 col-lg-6 col-md-4">
+
+                <div class="card o-hidden border-0 shadow-lg my-5">
+                    <div class="card-body p-0">
+                        <!-- Nested Row within Card Body -->
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="p-3">
+                                    <h1 class="h4 text-gray-900 mb-4">Mes associations</h1>
+                                    <ul>
+                                        {% for association in user.associations %}
+                                            <li>{{ association.name }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <section class="mt-5">
+            <div class="col-xl-6 col-lg-6 col-md-4">
+
+                <div class="card o-hidden border-0 shadow-lg my-5">
+                    <div class="card-body p-0">
+                        <!-- Nested Row within Card Body -->
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="p-3">
+                                    <div class="text-center">
+                                        <h1 class="h4 text-gray-900 mb-4">Actions</h1>
+                                    </div>
+                                    <a href="{{ path('user_edit', {'id': user.id}) }}" class="btn btn-primary">Mettre à jours</a>
+                                    <a href="{{ path('user_reset_password') }}" class="btn btn-primary">Changer le mot de passe</a>
+                                    {#<button class="btn btn-danger modal-unsubscribe"  data-toggle="modal" data-target="#unsubscribeModal">Me désinscrire</button>#}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </section>
+    {% include "modals/unsubscribe.html.twig" %}
+{% endblock %}
