@@ -14,16 +14,13 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class SondageController extends AbstractController
 {
-
     /**
      * @Route("/", name="app_sondage_index")
      */
     public function index(){
         return $this->render("rules/index.html.twig");
     }
-    public function new(){
-        return $this->render("rules/index.html.twig");
-    }
+
     public function answer(){
         return $this->render("rules/index.html.twig");
     }

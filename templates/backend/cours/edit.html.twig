@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Cours{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.10/css/select2.css" rel="stylesheet" />
+{% endblock %}
+
+{% block body %}
+    <h1>Edit Cours</h1>
+
+    {{ include('cours/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('cours_index') }}">back to list</a>
+
+    {{ include('cours/_delete_form.html.twig') }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.10/js/select2.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('.select-js').select2();
+        });
+    </script>
+{% endblock %}
