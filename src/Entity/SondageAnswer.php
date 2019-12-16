@@ -25,12 +25,7 @@ class SondageAnswer
     private $user;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Themes", inversedBy="sondageAnswers")
-     */
-    private $themes;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Sondage", inversedBy="sondageAnswers")
+     * @ORM\ManyToOne(targetEntity="App\Entity\SondageQuestion", inversedBy="sondageAnswers")
      */
     private $sondage;
 
@@ -57,27 +52,21 @@ class SondageAnswer
         return $this;
     }
 
-    public function getThemes(): ?Themes
-    {
-        return $this->themes;
-    }
-
-    public function setThemes(?Themes $themes): self
-    {
-        $this->themes = $themes;
-
-        return $this;
-    }
-
-    public function getSondage(): ?Sondage
+    /**
+     * @return mixed
+     */
+    public function getSondage()
     {
         return $this->sondage;
     }
 
-    public function setSondage(?Sondage $sondage): self
+    /**
+     * @param mixed $sondage
+     * @return SondageAnswer
+     */
+    public function setSondage($sondage)
     {
         $this->sondage = $sondage;
-
         return $this;
     }
 }

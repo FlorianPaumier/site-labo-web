@@ -5,9 +5,27 @@
 {% block body %}
     <h1>Edit User</h1>
 
-    {{ include('partials/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ form_start(form) }}
+        {% form_theme form 'partials/template_form.html.twig' %}
 
-    <a href="{{ path('user_index') }}">back to list</a>
+        {% if is_granted("ROLE_SUPER_ADMIN") %}
+            {{ form_widget(form) }}
+        {% else %}
+            {{ form_row(form.name, {"attr" : {"readonly" : "readonly"}}) }}
+            {{ form_row(form.email, {"attr" : {"readonly" : "readonly"}}) }}
+            {{ form_row(form.class, {"attr" : {"readonly" : "readonly"}}) }}
+            <span class="d-none">
+                {{ form_row(form.thumbnail) }}
+            </span>
+            {{ form_row(form.point) }}
+        {% endif %}
 
+        <button class="btn btn-success m-4">{{ button_label|default('Save') }}</button>
+    {{ form_end(form) }}
+
+    <a href="{{ path('admin_user_index') }}">back to list</a>
+
+    {% if is_granted("ROLE_SUPER_ADMIN") %}
     {{ include('partials/_delete_form.html.twig') }}
+    {% endif %}
 {% endblock %}

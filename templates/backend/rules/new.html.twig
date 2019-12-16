@@ -5,7 +5,7 @@
 {% block body %}
     <h1>Create new Rules</h1>
 
-    {{ include('rules/_form.html.twig') }}
+    {{ include('backend/rules/_form.html.twig') }}
 
-    <a href="{{ path('rules_index') }}">back to list</a>
+    <a href="{{ path('admin_rules_index') }}">back to list</a>
 {% endblock %}

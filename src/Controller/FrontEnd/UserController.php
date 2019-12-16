@@ -33,6 +33,10 @@ class UserController extends AbstractController
         ]);
     }
 
+    public function subscribe(){
+
+    }
+
     /**
      * @param Request $request
      * @Route("/unsubscribe", name="app_user_unsubscribe")

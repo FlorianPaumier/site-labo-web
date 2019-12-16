@@ -11,12 +11,26 @@
                 <th>Id</th>
                 <td>{{ sondage.id }}</td>
             </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ sondage.name }}</td>
+            </tr>
+            <tr>
+                <th>Question</th>
+                <td>
+                    <ul>
+                        {% for question in sondage.sondageQuestions %}
+                            <li>{{ question.name }}</li>
+                        {% endfor %}
+                    </ul>
+                </td>
+            </tr>
         </tbody>
     </table>
 
-    <a href="{{ path('sondage_index') }}">back to list</a>
+    <a href="{{ path('admin_sondage_index') }}">back to list</a>
 
-    <a href="{{ path('sondage_edit', {'id': sondage.id}) }}">edit</a>
+    <a href="{{ path('admin_sondage_edit', {'id': sondage.id}) }}">edit</a>
 
-    {{ include('sondage/_delete_form.html.twig') }}
+    {{ include('backend/sondage/_delete_form.html.twig') }}
 {% endblock %}

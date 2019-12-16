@@ -414,7 +414,9 @@
 {% endblock textarea_widget %}
 
 {%- block checkbox_widget -%}
-    {% if switcher is defined and switcher %}
-        {% set attr = attr|merge({'class': (attr.class|default('') ~ ' switcher')|trim}) %}
-    {% endif %}
+    <li class="tgl-list--item list-unstyled">
+        {% set attr = attr|merge({'class': (attr.class|default('') ~ ' tgl tgl-flip')|trim}) %}
+        <input type="checkbox" {{ block('widget_attributes') }} {% if value == 1 %}checked{% endif %}>
+        <label class="tgl-btn" data-tg-off="Nope" data-tg-on="Yeah!" for="{{ id }}"></label>
+    </li>
 {%- endblock -%}

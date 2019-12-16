@@ -4,8 +4,40 @@
 
 {% block body %}
     <h1>Create new Sondage</h1>
+    <section class="container">
 
-    {{ include('partials/_form.html.twig') }}
+        {{ form_start(form) }}
+        {% form_theme form "partials/template_form.html.twig" %}
+        {{ form_widget(form)}}
 
-    <a href="{{ path('admin_sondage_index') }}">back to list</a>
+
+        <hr>
+        <ul id="question-fields-list"
+            class="list-unstyled"
+            data-prototype="{{ form_widget(form.sondageQuestions.vars.prototype)|e }}"
+            data-widget-tags="{{ '<li></li>'|e }}"
+            data-widget-counter="{{ form.sondageQuestions|length }}">
+            {% for questionField in form.sondageQuestions %}
+                <li>
+                    {{ form_errors(questionField) }}
+                    {{ form_widget(questionField) }}
+                </li>
+            {% endfor %}
+        </ul>
+
+        <button type="button"
+                class="add-another-collection-widget btn btn-info"
+                data-list-selector="#question-fields-list">Add another question</button>
+        <button type="submit" class="btn btn-success">Valider</button>
+        {{ form_end(form) }}
+    </section>
+
+
+
+    <a href="{{ path('admin_sondage_index') }}" class="btn btn-info">back to list</a>
+{% endblock %}
+
+{% block javascript %}
+    {{ parent() }}
+    <script src="{{ asset('scripts/js/add-collection.js') }}"></script>
 {% endblock %}

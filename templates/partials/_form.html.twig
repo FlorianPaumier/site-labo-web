@@ -1,14 +1,5 @@
 {{ form_start(form) }}
     {% form_theme form 'partials/template_form.html.twig' %}
-    {{ form_row(form.name) }}
-    {{ form_row(form.email) }}
-    {{ form_row(form.class) }}
-    {% if is_granted("ROLE_ADMIN") %}
-        {{ form_row(form.point) }}
-    {% else %}
-        <div class="hide">
-            {{ form_row(form.point) }}
-        </div>
-    {% endif %}
+    {{ form_widget(form) }}
     <button class="btn btn-success m-4">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}

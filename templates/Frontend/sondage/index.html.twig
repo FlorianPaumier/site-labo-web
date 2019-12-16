@@ -3,31 +3,89 @@
 {% block title %}Sondage index{% endblock %}
 
 {% block body %}
-    <h1>Sondage index</h1>
+    <h1 class="text-center mb-2">Sondages</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for sondage in sondages %}
-            <tr>
-                <td>{{ sondage.id }}</td>
-                <td>
-                    <a href="{{ path('admin_sondage_show', {'id': sondage.id}) }}">show</a>
-                    <a href="{{ path('admin_sondage_edit', {'id': sondage.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="2">no records found</td>
-            </tr>
+    <section class="container">
+        {% for sondage in sondagesOngoing %}
+            <section class="card col-md-6 col-sm-10">
+                <div class="card-header">
+                    {{ sondage.name }}
+                </div>
+                <div class="card-body">
+                    <ul class="list-unstyled">
+                        {% for question in sondage.sondageQuestions %}
+                            <li class="tg-list-item row">
+                                <input type="radio" class="tgl tgl-skewed sondage-{{ sondage.id }}" id="question-{{ question.id }}" name="sondage-{{ sondage.id }}"
+                                       value="{{ question.id }}">
+                                <label class="tgl-btn" data-tg-off="✘" data-tg-on="✓" for="question-{{ question.id }}"></label>
+                                <span class="ml-4">{{ question.name }}</span>
+                            </li>
+                            {% if not loop.last %}
+                                <hr>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="card-footer">
+                    <button type="button" class="btn btn-success btn-send" data-id="{{ sondage.id }}">Valider</button>
+                </div>
+            </section>
         {% endfor %}
-        </tbody>
-    </table>
+    </section>
+    <section class="container">
+        {% for sondage in sondagesOver %}
+            <section class="card col-md-6 col-sm-10">
+                <div class="card-header">
+                    {{ sondage.name }}
+                </div>
+                <div class="card-body">
+                    <ul class="list-unstyled">
+                        {% for key, question in sondage.sondageQuestions %}
+                            <li class="tg-list-item row">
+                                {{ sondage.sondageQuestions|length / sondage.sondageQuestions|length }}
+                                <span class="ml-4">{{ question.name }}</span>
+                            </li>
+                            {% if not loop.last %}
+                                <hr>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="card-footer">
+                    <button type="button" class="btn btn-success btn-send" data-id="{{ sondage.id }}">Valider</button>
+                </div>
+            </section>
+        {% endfor %}
+    </section>
+{% endblock %}
 
-    <a href="{{ path('admin_sondage_new') }}">Create new</a>
+{% block javascript %}
+{{ parent() }}
+
+<script type="application/javascript">
+    $(document).ready(function() {
+      $('.btn-send').click(function() {
+          const id = $(this).data('id');
+          const choice = $(".sondage-"+id+":checked").val();
+          const body = {
+                "question" : choice
+              };
+
+          fetch("{{ path('app_sondage_answer') }}", {
+              headers: {
+                  'Content-Type': 'application/json'
+                },
+            mode: 'cors',
+              method : 'POST',
+              body  : JSON.stringify(body)
+          }).then((response) => {
+              return response.json();
+          }).then((response) => {
+              console.log(response);
+          }).catch((response) => {
+              console.log(response);
+          });
+      });
+    })
+</script>
 {% endblock %}

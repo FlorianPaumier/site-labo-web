@@ -19,8 +19,8 @@
                 <td>{{ rule.id }}</td>
                 <td>{{ rule.content }}</td>
                 <td>
-                    <a href="{{ path('rules_show', {'id': rule.id}) }}">show</a>
-                    <a href="{{ path('rules_edit', {'id': rule.id}) }}">edit</a>
+                    <a href="{{ path('admin_rules_show', {'id': rule.id}) }}">show</a>
+                    <a href="{{ path('admin_rules_edit', {'id': rule.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}
@@ -31,5 +31,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('rules_new') }}">Create new</a>
+    <a href="{{ path('admin_rules_new') }}">Create new</a>
 {% endblock %}

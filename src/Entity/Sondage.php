@@ -22,12 +22,7 @@ class Sondage
     private $id;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Themes", inversedBy="sondages")
-     */
-    private $themes;
-
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\SondageAnswer", mappedBy="sondage")
+     * @ORM\OneToMany(targetEntity="App\Entity\SondageAnswer", mappedBy="sondage", cascade={"remove"})
      */
     private $sondageAnswers;
 
@@ -41,47 +36,29 @@ class Sondage
      */
     private $name;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\SondageQuestion", mappedBy="sondage", cascade={"persist", "remove"}, fetch="EAGER")
+     */
+    private $sondageQuestions;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Association", inversedBy="sondages")
+     */
+    private $association;
+
     public function __construct()
     {
-        $this->themes = new ArrayCollection();
         $this->sondageAnswers = new ArrayCollection();
-
-
         $this->createdAt = new \DateTime();
         $this->updatedAt = new \DateTime();
+        $this->sondageQuestions = new ArrayCollection();
     }
 
     public function getId(): ?int
     {
         return $this->id;
     }
-
-    /**
-     * @return Collection|Themes[]
-     */
-    public function getThemes(): Collection
-    {
-        return $this->themes;
-    }
-
-    public function addTheme(Themes $theme): self
-    {
-        if (!$this->themes->contains($theme)) {
-            $this->themes[] = $theme;
-        }
-
-        return $this;
-    }
-
-    public function removeTheme(Themes $theme): self
-    {
-        if ($this->themes->contains($theme)) {
-            $this->themes->removeElement($theme);
-        }
-
-        return $this;
-    }
-
+    
     /**
      * @return Collection|SondageAnswer[]
      */
@@ -133,6 +110,49 @@ class Sondage
     public function setName(string $name): self
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|SondageQuestion[]
+     */
+    public function getSondageQuestions(): Collection
+    {
+        return $this->sondageQuestions;
+    }
+
+    public function addSondageQuestion(SondageQuestion $sondageQuestion): self
+    {
+        if (!$this->sondageQuestions->contains($sondageQuestion)) {
+            $this->sondageQuestions[] = $sondageQuestion;
+            $sondageQuestion->setSondage($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSondageQuestion(SondageQuestion $sondageQuestion): self
+    {
+        if ($this->sondageQuestions->contains($sondageQuestion)) {
+            $this->sondageQuestions->removeElement($sondageQuestion);
+            // set the owning side to null (unless already changed)
+            if ($sondageQuestion->getSondage() === $this) {
+                $sondageQuestion->setSondage(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getAssociation(): ?Association
+    {
+        return $this->association;
+    }
+
+    public function setAssociation(?Association $association): self
+    {
+        $this->association = $association;
 
         return $this;
     }

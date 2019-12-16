@@ -5,9 +5,9 @@
 {% block body %}
     <h1>Edit Rules</h1>
 
-    {{ include('rules/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('backend/rules/_form.html.twig', {'button_label': 'Update'}) }}
 
-    <a href="{{ path('rules_index') }}">back to list</a>
+    <a href="{{ path('admin_rules_index') }}">back to list</a>
 
-    {{ include('rules/_delete_form.html.twig') }}
+    {{ include('backend/rules/_delete_form.html.twig') }}
 {% endblock %}

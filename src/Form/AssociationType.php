@@ -31,6 +31,7 @@ class AssociationType extends AbstractType
                 'image_uri'         => true,
                 'asset_helper'      => true,
                 'data_class'        => null,
+                'required'          => false
             ])
             ->add('description', CKEditorType::class,[
                 "label" =>      "description",

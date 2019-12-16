@@ -79,11 +79,17 @@ class Association
      */
     private $events;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Sondage", mappedBy="association")
+     */
+    private $sondages;
+
 
     public function __construct()
     {
         $this->participants = new ArrayCollection();
         $this->events = new ArrayCollection();
+        $this->sondages = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -255,6 +261,37 @@ class Association
     public function setColor(?string $color): self
     {
         $this->color = $color;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Sondage[]
+     */
+    public function getSondages(): Collection
+    {
+        return $this->sondages;
+    }
+
+    public function addSondage(Sondage $sondage): self
+    {
+        if (!$this->sondages->contains($sondage)) {
+            $this->sondages[] = $sondage;
+            $sondage->setAssociation($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSondage(Sondage $sondage): self
+    {
+        if ($this->sondages->contains($sondage)) {
+            $this->sondages->removeElement($sondage);
+            // set the owning side to null (unless already changed)
+            if ($sondage->getAssociation() === $this) {
+                $sondage->setAssociation(null);
+            }
+        }
 
         return $this;
     }

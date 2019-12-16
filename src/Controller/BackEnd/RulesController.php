@@ -18,17 +18,17 @@ use Symfony\Component\Routing\Annotation\Route;
 class RulesController extends AbstractController
 {
     /**
-     * @Route("/", name="rules_index", methods={"GET"})
+     * @Route("/", name="admin_rules_index", methods={"GET"})
      */
     public function index(RulesRepository $rulesRepository): Response
     {
-        return $this->render('rules/index.html.twig', [
+        return $this->render('backend/rules/index.html.twig', [
             'rules' => $rulesRepository->findAll(),
         ]);
     }
 
     /**
-     * @Route("/new", name="rules_new", methods={"GET","POST"})
+     * @Route("/new", name="admin_rules_new", methods={"GET","POST"})
      */
     public function new(Request $request): Response
     {
@@ -41,27 +41,27 @@ class RulesController extends AbstractController
             $entityManager->persist($rule);
             $entityManager->flush();
 
-            return $this->redirectToRoute('rules_index');
+            return $this->redirectToRoute('admin_rules_index');
         }
 
-        return $this->render('rules/new.html.twig', [
+        return $this->render('backend/rules/new.html.twig', [
             'rule' => $rule,
             'form' => $form->createView(),
         ]);
     }
 
     /**
-     * @Route("/{id}", name="rules_show", methods={"GET"})
+     * @Route("/{id}", name="admin_rules_show", methods={"GET"})
      */
     public function show(Rules $rule): Response
     {
-        return $this->render('rules/show.html.twig', [
+        return $this->render('backend/rules/show.html.twig', [
             'rule' => $rule,
         ]);
     }
 
     /**
-     * @Route("/{id}/edit", name="rules_edit", methods={"GET","POST"})
+     * @Route("/{id}/edit", name="admin_rules_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, Rules $rule): Response
     {
@@ -71,17 +71,17 @@ class RulesController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('rules_index');
+            return $this->redirectToRoute('admin_rules_index');
         }
 
-        return $this->render('rules/edit.html.twig', [
+        return $this->render('backend/rules/edit.html.twig', [
             'rule' => $rule,
             'form' => $form->createView(),
         ]);
     }
 
     /**
-     * @Route("/{id}", name="rules_delete", methods={"DELETE"})
+     * @Route("/{id}", name="admin_rules_delete", methods={"DELETE"})
      */
     public function delete(Request $request, Rules $rule): Response
     {
@@ -91,6 +91,6 @@ class RulesController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('rules_index');
+        return $this->redirectToRoute('admin_rules_index');
     }
 }

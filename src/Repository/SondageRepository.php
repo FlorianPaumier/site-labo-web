@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Sondage;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Persistence\ManagerRegistry;
 
 /**
@@ -47,4 +48,39 @@ class SondageRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function findAnswerableByAssociations($user, $associations = null)
+    {
+        if(is_null($associations)){
+            return [];
+        }
+
+        return $this->createQueryBuilder("s")
+            ->innerJoin("s.association", "a")
+            ->innerJoin("s.sondageAnswers", "sa")
+            ->where("a.id = :id")
+            ->andWhere("sa.user != :user")
+            ->andWhere("s.enable = true")
+            ->setParameter("id", $associations)
+            ->setParameter("user", $user)
+            ->getQuery()
+            ->getResult();
+    }
+    public function findAnsweredByAssociations($user, $associations = null)
+    {
+        if(is_null($associations)){
+            return [];
+        }
+
+        return $this->createQueryBuilder("s")
+            ->innerJoin("s.association", "a")
+            ->innerJoin("s.sondageAnswers", "sa")
+            ->where("a.id = :id")
+            ->andWhere("sa.user = :user")
+            ->andWhere("s.enable = true")
+            ->setParameter("id", $associations)
+            ->setParameter("user", $user)
+            ->getQuery()
+            ->getResult();
+    }
 }

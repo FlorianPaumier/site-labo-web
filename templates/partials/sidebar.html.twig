@@ -33,13 +33,22 @@
 
         <!-- Heading -->
 
-        {% if  is_granted("ROLE_ADMIN") %}
+        {% if is_granted("ROLE_ADMIN") %}
             <!-- Nav Item - Pages Collapse Menu --->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="{{ path('association_index') }}">
+                <a class="nav-link collapsed"
+                   href="#" data-toggle="collapse" data-target="#collapseAssoc"
+                   aria-expanded="true" aria-controls="collapseAssoc">
                     <i class="fas fa-fw fa-flag"></i>
                     <span>Associations</span>
                 </a>
+                <div id="collapseAssoc" class="collapse" aria-labelledby="headingAssoc" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="{{ path('admin_association_index') }}">Gestion</a>
+                        <a class="collapse-item" href="{{ path('admin_rules_index') }}">Charte</a>
+                        <a class="collapse-item" href="{{ path('admin_event_index') }}">Evenement</a>
+                    </div>
+                </div>
             </li>
             <hr class="sidebar-divider">
             <li class="nav-item">
@@ -51,13 +60,13 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="{{ path('admin_sondage_index') }}">Liste</a>
                         <a class="collapse-item" href="{{ path('admin_sondage_new') }}">Ajout</a>
-                        <a class="collapse-item" href="{{ path('sondage_answer_index') }}">Réponse</a>
+                        <a class="collapse-item" href="{{ path('app_sondage_index') }}">Répondres</a>
                     </div>
                 </div>
             </li>
             <hr class="sidebar-divider">
             <li class="nav-item">
-                <a class="nav-link collapsed" href="{{ path('event_index') }}">
+                <a class="nav-link collapsed" href="{{ path('app_events_index') }}">
                     <i class="fas fa-fw fa-calendar"></i>
                     <span>Evenement</span>
                 </a>
@@ -71,7 +80,7 @@
             </li>
             <hr class="sidebar-divider">
             <li class="nav-item">
-                <a class="nav-link collapsed" href="{{ path('user_index') }}">
+                <a class="nav-link collapsed" href="{{ path('admin_user_index') }}">
                     <i class="fas fa-fw fa-user"></i>
                     <span>Utilisateur</span>
                 </a>
@@ -83,21 +92,6 @@
                         <i class="fas fa-fw fa-font"></i>
                         <span>Catégory</span>
                     </a>
-                </li>
-                <hr class="sidebar-divider">
-                <li class="nav-item">
-                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseAssoc" aria-expanded="true" aria-controls="collapseAssoc">
-                        <i class="fas fa-fw fa-flag"></i>
-                        <span>Associations</span>
-                    </a>
-                    {% if is_granted("ROLE_SUPER_ADMIN") %}
-                        <div id="collapseAssoc" class="collapse" aria-labelledby="headingAssoc" data-parent="#accordionSidebar">
-                            <div class="bg-white py-2 collapse-inner rounded">
-                                <a class="collapse-item" href="{{ path('rules_index') }}">Charte</a>
-                                <a class="collapse-item" href="{{ path('rules_index') }}">Evenement</a>
-                            </div>
-                        </div>
-                    {% endif %}
                 </li>
             {% endif %}
             <!-- Nav Item - Utilities Collapse Menu
@@ -126,8 +120,8 @@
                 </a>
                 <div id="collapseAssoc" class="collapse" aria-labelledby="headingAssoc" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="{{ path('admin_rules_index') }}">Charte</a>
-                        <a class="collapse-item" href="{{ path('admin_events_index') }}">Evenement</a>
+                        <a class="collapse-item" href="{{ path('rules_index') }}">Charte</a>
+                        <a class="collapse-item" href="{{ path('app_events_index') }}">Evenement</a>
                     </div>
                 </div>
             </li>
@@ -139,7 +133,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link collapsed" href="{{ path('sondage_index') }}">
+                <a class="nav-link collapsed" href="{{ path('app_sondage_index') }}">
                     <i class="fas fa-fw fa-area-chart"></i>
                     <span>Sondage</span>
                 </a>

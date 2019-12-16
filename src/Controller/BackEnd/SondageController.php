@@ -25,7 +25,7 @@ class SondageController extends AbstractController
      */
     public function index(SondageRepository $sondageRepository): Response
     {
-        return $this->render('sondage/index.html.twig', [
+        return $this->render('backend/sondage/index.html.twig', [
             'sondages' => $sondageRepository->findAll(),
         ]);
     }
@@ -48,7 +48,7 @@ class SondageController extends AbstractController
             return $this->redirectToRoute('admin_sondage_index');
         }
 
-        return $this->render('sondage/new.html.twig', [
+        return $this->render('backend/sondage/new.html.twig', [
             'sondage' => $sondage,
             'form' => $form->createView(),
         ]);
@@ -60,7 +60,7 @@ class SondageController extends AbstractController
      */
     public function show(Sondage $sondage): Response
     {
-        return $this->render('sondage/show.html.twig', [
+        return $this->render('backend/sondage/show.html.twig', [
             'sondage' => $sondage,
         ]);
     }
@@ -75,12 +75,15 @@ class SondageController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            foreach ($sondage->getSondageQuestions() as $question){
+                $question->setSondage($sondage);
+            }
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('admin_sondage_index');
         }
 
-        return $this->render('sondage/edit.html.twig', [
+        return $this->render('backend/sondage/edit.html.twig', [
             'sondage' => $sondage,
             'form' => $form->createView(),
         ]);
