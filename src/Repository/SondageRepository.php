@@ -57,7 +57,8 @@ class SondageRepository extends ServiceEntityRepository
 
         return $this->createQueryBuilder("s")
             ->innerJoin("s.association", "a")
-            ->innerJoin("s.sondageAnswers", "sa")
+            ->innerJoin("s.sondageQuestions", "sq")
+            ->innerJoin("sq.answers", "sa")
             ->where("a.id = :id")
             ->andWhere("sa.user != :user")
             ->andWhere("s.enable = true")
@@ -74,7 +75,8 @@ class SondageRepository extends ServiceEntityRepository
 
         return $this->createQueryBuilder("s")
             ->innerJoin("s.association", "a")
-            ->innerJoin("s.sondageAnswers", "sa")
+            ->innerJoin("s.sondageQuestions", "sq")
+            ->innerJoin("sq.answers", "sa")
             ->where("a.id = :id")
             ->andWhere("sa.user = :user")
             ->andWhere("s.enable = true")

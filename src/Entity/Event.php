@@ -32,7 +32,7 @@ class Event
     private $happensAt;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="text", length=255)
      */
     private $description;
 
@@ -42,14 +42,14 @@ class Event
     private $place;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\User", cascade={"persist", "remove"})
-     */
-    private $createdBy;
-
-    /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Association", inversedBy="events")
      */
     private $association;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="events")
+     */
+    private $author;
 
     public function getId(): ?int
     {
@@ -116,18 +116,6 @@ class Event
         return $this;
     }
 
-    public function getCreatedBy(): ?User
-    {
-        return $this->createdBy;
-    }
-
-    public function setCreatedBy(?User $createdBy): self
-    {
-        $this->createdBy = $createdBy;
-
-        return $this;
-    }
-
     public function getAssociation(): ?Association
     {
         return $this->association;
@@ -136,6 +124,18 @@ class Event
     public function setAssociation(?Association $association): self
     {
         $this->association = $association;
+
+        return $this;
+    }
+
+    public function getAuthor(): ?User
+    {
+        return $this->author;
+    }
+
+    public function setAuthor(?User $author): self
+    {
+        $this->author = $author;
 
         return $this;
     }

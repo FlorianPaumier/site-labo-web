@@ -33,16 +33,16 @@
         {% endfor %}
     </section>
     <section class="container">
-        {% for sondage in sondagesOver %}
+        {% for id , sondage in sondagesOver %}
             <section class="card col-md-6 col-sm-10">
                 <div class="card-header">
                     {{ sondage.name }}
                 </div>
                 <div class="card-body">
                     <ul class="list-unstyled">
-                        {% for key, question in sondage.sondageQuestions %}
+                        {% for key, question in sondage.questions %}
                             <li class="tg-list-item row">
-                                {{ sondage.sondageQuestions|length / sondage.sondageQuestions|length }}
+                                {{ (question.answers|length / sondage.participants)|round(1, "common") * 100 }} %
                                 <span class="ml-4">{{ question.name }}</span>
                             </li>
                             {% if not loop.last %}
@@ -52,7 +52,7 @@
                     </ul>
                 </div>
                 <div class="card-footer">
-                    <button type="button" class="btn btn-success btn-send" data-id="{{ sondage.id }}">Valider</button>
+                    <button type="button" class="btn btn-success btn-send" data-id="{{ id }}">Valider</button>
                 </div>
             </section>
         {% endfor %}

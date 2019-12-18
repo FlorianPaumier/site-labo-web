@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <section id="calender" class="calendar-js container">
+        {% for event in events %}
+            <section class="col-md-4 col-sm-12">
+            <div class="card">
+                <div class="card-header">{{ event.name }}</div>
+                <div class="card-body">{{ event.description|raw }}</div>
+                <div class="card-footer">{{ event.happensAt|localizeddate("medium", "none") }}</div>
+            </div>
+            </section>
+        {% endfor %}
+    </section>
+{% endblock %}

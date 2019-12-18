@@ -25,9 +25,9 @@ class SondageAnswer
     private $user;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\SondageQuestion", inversedBy="sondageAnswers")
+     * @ORM\ManyToOne(targetEntity="App\Entity\SondageQuestion", inversedBy="answers")
      */
-    private $sondage;
+    private $sondageQuestion;
 
     public function __construct()
     {
@@ -52,21 +52,15 @@ class SondageAnswer
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getSondage()
+    public function getSondageQuestion(): ?SondageQuestion
     {
-        return $this->sondage;
+        return $this->sondageQuestion;
     }
 
-    /**
-     * @param mixed $sondage
-     * @return SondageAnswer
-     */
-    public function setSondage($sondage)
+    public function setSondageQuestion(?SondageQuestion $sondageQuestion): self
     {
-        $this->sondage = $sondage;
+        $this->sondageQuestion = $sondageQuestion;
+
         return $this;
     }
 }

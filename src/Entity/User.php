@@ -100,6 +100,11 @@ class User implements UserInterface
      */
     private $threads;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Event", mappedBy="author")
+     */
+    private $events;
+
     public function __construct()
     {
         $this->point = 0;
@@ -110,6 +115,7 @@ class User implements UserInterface
         $this->updatedAt = new \DateTime();
         $this->associations = new ArrayCollection();
         $this->threads = new ArrayCollection();
+        $this->events = new ArrayCollection();
     }
 
     public function __toString()
@@ -411,6 +417,37 @@ class User implements UserInterface
         if ($this->threads->contains($thread)) {
             $this->threads->removeElement($thread);
             $thread->removeUser($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Event[]
+     */
+    public function getEvents(): Collection
+    {
+        return $this->events;
+    }
+
+    public function addEvent(Event $event): self
+    {
+        if (!$this->events->contains($event)) {
+            $this->events[] = $event;
+            $event->setAuthor($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEvent(Event $event): self
+    {
+        if ($this->events->contains($event)) {
+            $this->events->removeElement($event);
+            // set the owning side to null (unless already changed)
+            if ($event->getAuthor() === $this) {
+                $event->setAuthor(null);
+            }
         }
 
         return $this;

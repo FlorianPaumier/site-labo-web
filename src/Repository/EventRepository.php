@@ -19,6 +19,17 @@ class EventRepository extends ServiceEntityRepository
         parent::__construct($registry, Event::class);
     }
 
+    public function findAllPublished()
+    {
+        $now = (new \DateTime())->format("Y-m-d");
+        return $this->createQueryBuilder("e")
+            ->where("e.publishedAt < :now")
+            ->setParameter("now", $now)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
     // /**
     //  * @return Event[] Returns an array of Event objects
     //  */

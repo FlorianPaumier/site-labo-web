@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\Association;
 use App\Entity\SondageAnswer;
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
@@ -49,6 +50,7 @@ class SondageAnswerRepository extends ServiceEntityRepository
             ->getResult()
             ;
     }
+
     // /**
     //  * @return SondageAnswer[] Returns an array of SondageAnswer objects
     //  */

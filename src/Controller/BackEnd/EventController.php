@@ -3,8 +3,10 @@
 namespace App\Controller\BackEnd;
 
 use App\Entity\Event;
+use App\Entity\User;
 use App\Form\EventType;
 use App\Repository\EventRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,10 +22,18 @@ class EventController extends AbstractController
     /**
      * @Route("/", name="admin_event_index", methods={"GET"})
      */
-    public function index(EventRepository $eventRepository): Response
+    public function index(EntityManagerInterface $em): Response
     {
+        /** @var User $user */
+        $user = $this->getUser();
+        if(in_array("ROLE_SUPER_ADMIN", $user->getRoles())){
+            $events = $em->getRepository(Event::class)->findAll();
+        }else{
+            $events = $em->getRepository(Event::class)->findBy(["author" => $this->getUser()]);
+        }
+
         return $this->render('backend/event/index.html.twig', [
-            'events' => $eventRepository->findAll(),
+            'events' => $events,
         ]);
     }
 
@@ -38,6 +48,7 @@ class EventController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
+            $event->setAuthor($this->getUser());
             $entityManager->persist($event);
             $entityManager->flush();
 

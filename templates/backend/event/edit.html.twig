@@ -5,9 +5,15 @@
 {% block body %}
     <h1>Edit Event</h1>
 
-    {{ include('event/_form.html.twig', {'button_label': 'Update'}) }}
+    <section class="container">
+        {{ form_start(form) }}
+        {% form_theme form "partials/_form.html.twig" %}
+        {{ form_widget(form) }}
+        <button class="btn btn-success">{{ button_label|default('Save') }}</button>
+        {{ form_end(form) }}
+    </section>
 
-    <a href="{{ path('event_index') }}">back to list</a>
+    <a href="{{ path('admin_event_index') }}">back to list</a>
 
-    {{ include('event/_delete_form.html.twig') }}
+    {{ include('backend/event/_delete_form.html.twig') }}
 {% endblock %}

@@ -27,9 +27,27 @@ class SondageController extends AbstractController
     public function index(){
         /** @var User $user */
         $user = $this->getUser();
+        $sondages = $this->getDoctrine()->getRepository(Sondage::class)->findAnsweredByAssociations($user, $user->getAssociations());
+        $statAnswers = [];
+
+        /** @var Sondage $sondage */
+        foreach ($sondages as $sondage){
+            $participants = 0;
+            foreach ($sondage->getSondageQuestions() as $question){
+                $participants += $question->getAnswers()->count();
+            }
+
+            $statAnswers[$sondage->getId()] = [
+                "name" => $sondage->getName(),
+                "participants" => $participants,
+                "questions" => $sondage->getSondageQuestions(),
+            ];
+        }
+
+
         return $this->render("frontend/sondage/index.html.twig", [
             "sondagesOngoing" => $this->getDoctrine()->getRepository(Sondage::class)->findAnswerableByAssociations($user, $user->getAssociations()),
-            "sondagesOver" => $this->getDoctrine()->getRepository(Sondage::class)->findAnsweredByAssociations($user, $user->getAssociations()),
+            "sondagesOver" => $statAnswers,
         ]);
     }
 

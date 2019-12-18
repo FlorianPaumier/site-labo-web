@@ -31,12 +31,5 @@
 
 {% block javascript %}
     {{ parent() }}
-    <script>
-        $(document).ready(function() {
-          $(".card-association").click(function() {
-              let id = $(this).data("id");
-               window.location = "/association/"+id;
-          });
-        });
-    </script>
+    <script src="{{ asset('scripts/js/home.js') }}"></script>
 {% endblock %}
