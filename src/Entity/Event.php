@@ -3,9 +3,11 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation as JMS;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\EventRepository")
+ * @JMS\ExclusionPolicy("all")
  */
 class Event
 {
@@ -13,41 +15,50 @@ class Event
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @JMS\Exclude()
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @JMS\Expose()
      */
     private $name;
 
     /**
      * @ORM\Column(type="datetime")
+     * @JMS\Expose()
      */
     private $publishedAt;
 
     /**
      * @ORM\Column(type="datetime")
+     * @JMS\Expose()
      */
     private $happensAt;
 
     /**
      * @ORM\Column(type="text", length=255)
+     * @JMS\Expose()
      */
     private $description;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @JMS\Expose()
      */
     private $place;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Association", inversedBy="events")
+     * @JMS\Expose()
+     * @JMS\MaxDepth(1)
      */
     private $association;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="events")
+     * @JMS\Exclude()
      */
     private $author;
 

@@ -1,16 +1,48 @@
 {% extends 'base.html.twig' %}
+{% block styles %}
+    {{ parent() }}
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/4.2.0/core/main.min.css" rel="stylesheet">
+    <style>
+        a.fc-event {
+            color : white;
+        }
+        a.fc-event:hover{
+            color : white;
+        }
+    </style>
+{% endblock %}
 
 {% block body %}
 
-    <section id="calender" class="calendar-js container">
-        {% for event in events %}
-            <section class="col-md-4 col-sm-12">
-            <div class="card">
-                <div class="card-header">{{ event.name }}</div>
-                <div class="card-body">{{ event.description|raw }}</div>
-                <div class="card-footer">{{ event.happensAt|localizeddate("medium", "none") }}</div>
+    <div id='wrap'>
+
+        <div id='calendar'></div>
+        <div id="calendar-modal" class="modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title"></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                    </div>
+                    <div class="modal-footer">
+                        Lieu : <span class="modal-footer--content"></span>
+                    </div>
+                </div>
             </div>
-            </section>
-        {% endfor %}
-    </section>
+        </div>
+    </div>
+
+
+{% endblock %}
+
+{% block javascript %}
+{{ parent() }}
+<script>
+    const route = "{{ path('app_event_show') }}";
+</script>
+
 {% endblock %}

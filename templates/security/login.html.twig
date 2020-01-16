@@ -8,9 +8,9 @@
         <!-- Outer Row -->
         <div class="row justify-content-center">
             {% if error %}
-            <div class="mb-3">
-                <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-            </div>
+                <div class="mb-3">
+                    <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                </div>
             {% endif %}
 
             {% if app.user %}
@@ -28,9 +28,9 @@
                             <div class="col-lg-6">
                                 <div class="p-5">
                                     <form method="post">
-                                    <div class="text-center">
-                                        <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
-                                    </div>
+                                        <div class="text-center">
+                                            <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
+                                        </div>
                                         <div class="form-group">
                                             <input type="email" class="form-control form-control-user" value="{{ last_username }}"
                                                    id="exampleInputEmail" name="email" aria-describedby="emailHelp" placeholder="Enter Email Address...">

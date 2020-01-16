@@ -17,17 +17,39 @@
   },
   "homepage": "https://github.com/FlorianPaumier/site-labo-web#readme",
   "dependencies": {
-    "@symfony/webpack-encore": "^0.28.0",
-    "core-js": "3"
+    "@babel/core": "^7.0.0",
+    "@babel/plugin-syntax-dynamic-import": "^7.8.3",
+    "@babel/preset-env": "^7.8.3",
+    "@fullcalendar/bootstrap": "^4.3.0",
+    "@fullcalendar/core": "^4.3.1",
+    "@fullcalendar/daygrid": "^4.3.0",
+    "@fullcalendar/interaction": "^4.3.0",
+    "@fullcalendar/list": "^4.3.0",
+    "@fullcalendar/timegrid": "^4.3.0",
+    "@popperjs/core": "^2.0.0-rc.1",
+    "@symfony/webpack-encore": "^0.28.2",
+    "bootstrap-sass": "^3.4.1",
+    "core-js": "^3.6.4",
+    "datatable": "^2.0.2",
+    "datatables.net": "^1.10.20",
+    "datatables.net-dt": "^1.10.20",
+    "fibers": "^4.0.3",
+    "fullcalendar": "^3.10.1",
+    "highlight.js": "^9.17.1",
+    "moment": "^2.20.1",
+    "regenerator-runtime": "^0.13.3",
+    "select2": "^4.0.12"
   },
   "devDependencies": {
+    "babel-loader": "^8.0.6",
     "bootstrap": "^4.4.1",
     "chart.js": "^2.9.3",
+    "css-loader": "^3.4.2",
     "jquery": "^3.4.1",
     "node-sass": "^4.13.0",
     "popper.js": "^1.16.0",
-    "sass-loader": "^8.0.0",
-    "webpack": "^4.41.2",
+    "sass-loader": "^7.0.3",
+    "webpack": "^4.41.5",
     "webpack-notifier": "^1.8.0"
   }
 }

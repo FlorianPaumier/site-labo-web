@@ -1,5 +1,5 @@
 $(document).ready(function () {
-
+    "use strict"; // Start of use strict
     $('.btnSubmitSondage').click(function () {
        const sondage = $(this).data('id');
 

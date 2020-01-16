@@ -1,6 +1,6 @@
 (function(){
 
-    var chat = {
+    const chat = {
         messageToSend: '',
         messageResponses: [
             'Why did the web developer leave the restaurant? Because of the table layout.',
@@ -28,8 +28,8 @@
         render: function() {
             this.scrollToBottom();
             if (this.messageToSend.trim() !== '') {
-                var template = Handlebars.compile( $("#message-template").html());
-                var context = {
+                let template = Handlebars.compile( $("#message-template").html());
+                let context = {
                     messageOutput: this.messageToSend,
                     time: this.getCurrentTime()
                 };
@@ -39,8 +39,8 @@
                 this.$textarea.val('');
 
                 // responses
-                var templateResponse = Handlebars.compile( $("#message-response-template").html());
-                var contextResponse = {
+                let templateResponse = Handlebars.compile( $("#message-response-template").html());
+                let contextResponse = {
                     response: this.getRandomItem(this.messageResponses),
                     time: this.getCurrentTime()
                 };
@@ -79,11 +79,11 @@
 
     chat.init();
 
-    var searchFilter = {
+    let searchFilter = {
         options: { valueNames: ['name'] },
         init: function() {
-            var userList = new List('people-list', this.options);
-            var noItems = $('<li id="no-items-found">No items found</li>');
+            let userList = new List('people-list', this.options);
+            let noItems = $('<li id="no-items-found">No items found</li>');
 
             userList.on('updated', function(list) {
                 if (list.matchingItems.length === 0) {

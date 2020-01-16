@@ -1,4 +1,4 @@
-(function($) {
+$("document").ready(function() {
   "use strict"; // Start of use strict
 
   // Toggle the side navigation
@@ -48,4 +48,4 @@
 
   $('table.table-view').DataTable();
   $('select.select-js').select2();
-})(jQuery); // End of use strict
+}); // End of use strict
