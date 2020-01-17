@@ -55,7 +55,7 @@ class AssociationController extends AbstractController
      */
     public function show(Association $association): Response
     {
-        return $this->render('frontend/association/show.html.twig', [
+        return $this->render('Frontend/association/show.html.twig', [
             'association' => $association,
         ]);
     }

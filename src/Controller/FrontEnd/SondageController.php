@@ -45,7 +45,7 @@ class SondageController extends AbstractController
         }
 
 
-        return $this->render("frontend/sondage/index.html.twig", [
+        return $this->render("Frontend/sondage/index.html.twig", [
             "sondagesOngoing" => $this->getDoctrine()->getRepository(Sondage::class)->findAnswerableByAssociations($user, $user->getAssociations()),
             "sondagesOver" => $statAnswers,
         ]);

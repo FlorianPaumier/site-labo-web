@@ -26,7 +26,7 @@ class EventsController extends AbstractController
      */
     public function index(EntityManagerInterface $em, SerializerInterface $serializer){
 
-        return $this->render("frontend/events/index.html.twig");
+        return $this->render("Frontend/events/index.html.twig");
     }
 
     /**
