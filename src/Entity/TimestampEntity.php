@@ -14,6 +14,11 @@ use Doctrine\ORM\Mapping as ORM;
 trait TimestampEntity
 {
 
+    public function __construct()
+    {
+        $this->createdAt = new \DateTime();
+    }
+
     /**
      * @ORM\Column(type="date", options={"default" : "2019-01-01"})
      */
