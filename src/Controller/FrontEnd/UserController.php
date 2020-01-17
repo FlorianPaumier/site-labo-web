@@ -28,7 +28,7 @@ class UserController extends AbstractController
     public function me(): Response
     {
         $user = $this->getUser();
-        return $this->render('frontend/user/profile.html.twig', [
+        return $this->render('Frontend/user/profile.html.twig', [
             'user' => $user,
         ]);
     }
@@ -84,7 +84,7 @@ class UserController extends AbstractController
             }
         }
 
-        return $this->render('frontend/user/password.html.twig', array(
+        return $this->render('Frontend/user/password.html.twig', array(
             'form' => $form->createView(),
         ));
     }
@@ -102,7 +102,7 @@ class UserController extends AbstractController
 
         }
 
-        return $this->render('user/password.html.twig', array(
+        return $this->render('Frontend/user/password.html.twig', array(
             'form' => $form->createView(),
         ));
     }
@@ -122,7 +122,7 @@ class UserController extends AbstractController
             return $this->redirectToRoute('me');
         }
 
-        return $this->render('frontend/user/edit.html.twig', [
+        return $this->render('Frontend/user/edit.html.twig', [
             'user' => $user,
             'form' => $form->createView(),
         ]);
