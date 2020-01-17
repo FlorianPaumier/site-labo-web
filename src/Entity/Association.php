@@ -90,6 +90,8 @@ class Association
         $this->participants = new ArrayCollection();
         $this->events = new ArrayCollection();
         $this->sondages = new ArrayCollection();
+        $this->createdAt = new \DateTime();
+        $this->updatedAt = new \DateTime();
     }
 
     public function getId(): ?int
