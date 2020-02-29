@@ -6,34 +6,34 @@
     <h1>Emails index</h1>
     <div class="container">
 
-    <table class="table">
-        <thead>
+        <table class="table table-view">
+            <thead>
             <tr>
                 <th>Id</th>
                 <th>Title</th>
                 <th>Body</th>
                 <th>actions</th>
             </tr>
-        </thead>
-        <tbody>
-        {% for email in emails %}
-            <tr>
-                <td>{{ email.id }}</td>
-                <td>{{ email.title }}</td>
-                <td>{{ email.body }}</td>
-                <td>
-                    <a class="btn btn-blue" href="{{ path('admin_emails_show', {'id': email.id}) }}">show</a>
-                    <a class="btn btn-blue" href="{{ path('admin_emails_edit', {'id': email.id}) }}">edit</a>
-                    <a class="btn btn-danger" href="{{ path('admin_emails_send', {'id': email.id}) }}">Send</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="4">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+            {% for email in emails %}
+                <tr>
+                    <td>{{ email.id }}</td>
+                    <td>{{ email.title }}</td>
+                    <td>{{ email.body }}</td>
+                    <td>
+                        <a class="btn btn-blue" href="{{ path('admin_emails_show', {'id': email.id}) }}">show</a>
+                        <a class="btn btn-blue" href="{{ path('admin_emails_edit', {'id': email.id}) }}">edit</a>
+                        <a class="btn btn-danger" href="{{ path('admin_emails_send', {'id': email.id}) }}">Send</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="4">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
     </div>
 
     <a class="btn btn-success" href="{{ path('admin_emails_new') }}">Create new</a>

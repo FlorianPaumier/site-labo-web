@@ -5,7 +5,8 @@
 {% block body %}
     <h1>Sondage index</h1>
 
-    <table class="table">
+<div class="container">
+    <table class="table table-view">
         <thead>
             <tr>
                 <th>Id</th>
@@ -28,6 +29,6 @@
         {% endfor %}
         </tbody>
     </table>
-
+</div>
     <a href="{{ path('admin_sondage_new') }}">Create new</a>
 {% endblock %}

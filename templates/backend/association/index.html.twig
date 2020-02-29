@@ -5,7 +5,8 @@
 {% block body %}
     <h1>Association index</h1>
 
-    <table class="table">
+<div class="container">
+    <table class="table table-view">
         <thead>
             <tr>
                 <th>Id</th>
@@ -32,6 +33,8 @@
         {% endfor %}
         </tbody>
     </table>
+</div>
+
 
     <a href="{{ path('admin_association_new') }}">Create new</a>
 {% endblock %}

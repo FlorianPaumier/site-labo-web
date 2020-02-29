@@ -22,11 +22,11 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_home_home') }}">back to home</a>
+    <a href="{{ path('app_home') }}">back to home</a>
     {% if "ROLE_ADMIN" in app.user.roles %}
     <a href="{{ path('cours_edit', {'id': cour.id}) }}">edit</a>
         <a href="{{ path('cours_index') }}">back to list</a>
-        {{ include('cours/_delete_form.html.twig') }}
+        {{ include('backend/cours/_delete_form.html.twig') }}
     {% endif %}
 
 {% endblock %}

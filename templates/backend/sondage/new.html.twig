@@ -8,7 +8,7 @@
 
         {{ form_start(form) }}
         {% form_theme form "partials/template_form.html.twig" %}
-        {{ form_widget(form)}}
+        {{ form_widget(form) }}
 
 
         <hr>
@@ -27,7 +27,8 @@
 
         <button type="button"
                 class="add-another-collection-widget btn btn-info"
-                data-list-selector="#question-fields-list">Add another question</button>
+                data-list-selector="#question-fields-list">Add another question
+        </button>
         <button type="submit" class="btn btn-success">Valider</button>
         {{ form_end(form) }}
     </section>
@@ -38,6 +39,6 @@
 {% endblock %}
 
 {% block javascript %}
-    {{ parent() }}
-    <script src="{{ asset('scripts/js/add-collection.js') }}"></script>
+{{ parent() }}
+<script src="{{ asset('scripts/js/add-collection.js') }}"></script>
 {% endblock %}

@@ -5,7 +5,7 @@
 {% block body %}
     <h1 class="text-center">Event index</h1>
     <section class="container mt-3">
-        <table class="table">
+        <table class="table table-view">
             <thead>
             <tr>
                 <th>Id</th>
@@ -24,7 +24,7 @@
                     <td>{{ event.name }}</td>
                     <td>{{ event.publishedAt ? event.publishedAt|date('Y-m-d H:i:s') : '' }}</td>
                     <td>{{ event.happensAt ? event.happensAt|date('Y-m-d H:i:s') : '' }}</td>
-                    <td>{{ event.description }}</td>
+                    <td>{{ event.description|slice(0, 50) }}</td>
                     <td>{{ event.place }}</td>
                     <td>
                         <a href="{{ path('admin_event_show', {'id': event.id}) }}">show</a>

@@ -1,4 +1,9 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+<div class="container">
+
+        {{ form_start(form) }}
+        {% form_theme form "partials/template_form.html.twig" %}
+        {{ form_widget(form) }}
+<button class="btn btn-success">{{ button_label|default('Save') }}</button>
+</div>
 {{ form_end(form) }}

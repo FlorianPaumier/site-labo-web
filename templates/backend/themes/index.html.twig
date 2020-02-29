@@ -5,7 +5,8 @@
 {% block body %}
     <h1>Themes index</h1>
 
-    <table class="table">
+<div class="container">
+    <table class="table table-view">
         <thead>
             <tr>
                 <th>Id</th>
@@ -30,6 +31,7 @@
         {% endfor %}
         </tbody>
     </table>
+</div>
 
     <a href="{{ path('themes_new') }}">Create new</a>
 {% endblock %}
